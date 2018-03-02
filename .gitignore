@@ -32,3 +32,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Ignore: name DOT meta
+*.meta
+
+# Include: name DOT extension DOT meta
+!*.*.meta
