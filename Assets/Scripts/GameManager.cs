@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
 
 
     public delegate void MyDelegate(bool actif);
+
 	public  MyDelegate myDelegate;
 
 
@@ -43,9 +45,10 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
-		if (timeSec == 0) {
-
-		}
+        
+        if (timeSec <= 0.0f) {
+            SceneManager.LoadScene("GameOverScene");
+        }
 
 		if (Input.GetKeyUp (KeyCode.Tab)) {
             
