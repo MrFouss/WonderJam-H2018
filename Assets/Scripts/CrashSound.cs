@@ -5,6 +5,7 @@ public class CrashSound : MonoBehaviour {
 
 	[Tooltip("liste des sons lors de la collision du plus faible au plus fort")]
     public AudioClip[] crashSounds;
+    public Transform particle;
 
 
     private AudioSource source;
@@ -28,6 +29,7 @@ public class CrashSound : MonoBehaviour {
 		int i = (int)Mathf.Min(Mathf.Floor(coll.relativeVelocity.magnitude / maxVelocity * crashSounds.Length), crashSounds.Length-1);
 		Debug.Log(i);
         source.PlayOneShot(crashSounds[i],hitVol);
+        Instantiate(particle, coll.contacts[0].point, Quaternion.identity);
     }
 
 }

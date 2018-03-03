@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1982976219183416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0009999275, y: 0.21000016, z: 0.0069999993}
+  m_LocalPosition: {x: 3.52, y: 1.1, z: 0}
   m_LocalScale: {x: 2.4000003, y: 2.4000003, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -227,6 +227,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 20faae008fc8ddc41b2511f1c16642f0, type: 3}
   - {fileID: 8300000, guid: 22d9055c53f298a469245120ceacc999, type: 3}
   - {fileID: 8300000, guid: 1f2dd32bee7353b43bc66fb45c43e7cf, type: 3}
+  particle: {fileID: 4578215471601812, guid: 4059b89b43bb58c4b82fdc78f575e31e, type: 2}
 --- !u!114 &114319127855611834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,3 +473,20 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114653172395472418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d34c27353261e143b15cdd0315c6305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crashSounds:
+  - {fileID: 8300000, guid: 4fff71e558d482944b3965713b705f4c, type: 3}
+  - {fileID: 8300000, guid: 20faae008fc8ddc41b2511f1c16642f0, type: 3}
+  - {fileID: 8300000, guid: 22d9055c53f298a469245120ceacc999, type: 3}
+  - {fileID: 8300000, guid: 1f2dd32bee7353b43bc66fb45c43e7cf, type: 3}
+  particle: {fileID: 4578215471601812, guid: 4059b89b43bb58c4b82fdc78f575e31e, type: 2}
