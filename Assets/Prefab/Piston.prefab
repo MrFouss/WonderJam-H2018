@@ -45,7 +45,8 @@ GameObject:
   - component: {fileID: 33746275858988640}
   - component: {fileID: 65064260044902592}
   - component: {fileID: 23532854368878370}
-  - component: {fileID: 54179071714920872}
+  - component: {fileID: 54665411731822384}
+  - component: {fileID: 114907951445523040}
   m_Layer: 0
   m_Name: Piston
   m_TagString: Untagged
@@ -94,7 +95,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9fd2a4669ffee07458ac375a5b24f8bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +129,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9fd2a4669ffee07458ac375a5b24f8bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,7 +163,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643598419126248}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54179071714920872
+--- !u!54 &54665411731822384
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -324,6 +325,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 20faae008fc8ddc41b2511f1c16642f0, type: 3}
   - {fileID: 8300000, guid: 22d9055c53f298a469245120ceacc999, type: 3}
   - {fileID: 8300000, guid: 1f2dd32bee7353b43bc66fb45c43e7cf, type: 3}
+--- !u!114 &114907951445523040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643598419126248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fdadffdd246d74da47f8df288d6bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisions: 0
+  triggers: 0
 --- !u!114 &114932854441907234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,3 +354,4 @@ MonoBehaviour:
   tempsRepli: 1
   tempsPause: 0.5
   sonActivation: {fileID: 8300000, guid: 05dc211245cc17744924f287e663be7d, type: 3}
+  actif: 0

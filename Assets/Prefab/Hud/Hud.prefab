@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 114760313620158940}
   m_Layer: 5
   m_Name: Hud
-  m_TagString: Untagged
+  m_TagString: HUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 114464475947589542}
   TimerText: {fileID: 114818553731260544}
-  BallLauncherPrefab: {fileID: 1160999106718682, guid: f6a254fafd535cf4dac4e2d2059e9f11,
+  BallLauncherPrefab: {fileID: 1643598419126248, guid: 067398dd7884ccd42a4eefdb46987e17,
     type: 2}
   TargetPrefab: {fileID: 1898643459909492, guid: 144427ab7a0346343a5549fe66568910,
     type: 2}
