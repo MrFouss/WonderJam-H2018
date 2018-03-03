@@ -7,8 +7,11 @@ public class Balle : MonoBehaviour {
 
 	private RigidbodyConstraints  defaultRigid;
 
-	// Use this for initialization
-	void Awake () {
+    private GameManager gm;
+
+    // Use this for initialization
+    void Awake () {
+        gm = GameObject.FindObjectOfType<GameManager>();
 		defaultRigid = GetComponent<Rigidbody> ().constraints;
 	}
 	
@@ -20,6 +23,12 @@ public class Balle : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.B)){
 			restartBalle();
 		}
+
+        int gameZoneMask = LayerMask.GetMask(new string[] { "GameZone" });
+        if (!Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 0), Vector3.forward, Mathf.Infinity, gameZoneMask))
+        {
+            gm.launchModeEdit();
+        }
 	}
 
 
