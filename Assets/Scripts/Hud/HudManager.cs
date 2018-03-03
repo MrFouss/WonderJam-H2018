@@ -16,13 +16,17 @@ public class HudManager : MonoBehaviour {
     public GameObject SphereTrampolinePrefab;
     public GameObject TriangleTrampolinePrefab;
     public GameObject WallPrefab;
-    public GameObject RemovePrefab;
-
+    public Texture2D RemoveTexture;
+    public Texture2D ImpossibleRemoveTexture;
+    public Material TransparentMaterial;
+    
     public float rotationRate = 10;
 
     private bool removeMode = false;
     private Vector3 mousePosition;
     private GameObject spawnedObject;
+    private MeshRenderer spawnedObjectRenderer;
+    private Material spawnedObjectRealMaterial;
 
     public void UpdateScoreText(int score)
     {
@@ -68,17 +72,22 @@ public class HudManager : MonoBehaviour {
 
     public void RemoveButtonClick()
     {
-        SpawnObject(RemovePrefab);
+        //SpawnObject(RemovePrefab);
         removeMode = true;
+        if (spawnedObject != null)
+        {
+            Destroy(spawnedObject);
+        }
+        Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
 
-    private void OnGUI()
+    private void Update()
     {
         // retrieve mouse position in world space + 50
         Vector2 mouseScreenPos = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, 0));
         mousePosition.z = 0;
-        
+
         // if currently manipulating an object
         if (spawnedObject != null)
         {
@@ -88,7 +97,23 @@ public class HudManager : MonoBehaviour {
             // check if wheel active and rotate object
             float wheel = Input.mouseScrollDelta.y;
             spawnedObject.transform.Rotate(Vector3.forward, wheel * rotationRate);
+        }
 
+        // check if mouse in game zone
+        RaycastHit gameZoneHit = new RaycastHit();
+        int gameZoneMask = LayerMask.GetMask(new string[] {"GameZone"});
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out gameZoneHit, Mathf.Infinity, gameZoneMask))
+        {
+            // in game zone
+            if (removeMode)
+            {
+                Cursor.SetCursor(RemoveTexture, Vector2.zero, CursorMode.Auto);
+            }
+            else if (spawnedObject != null)
+            {
+                spawnedObjectRenderer.material = spawnedObjectRealMaterial;
+            }
+            
             // check if left mouse button clicked
             if (Input.GetMouseButtonDown(0))
             {
@@ -98,20 +123,37 @@ public class HudManager : MonoBehaviour {
                     removeMode = false;
                     // check what needs to be removed
                     RaycastHit hit = new RaycastHit();
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit))
+                    int nonGameZoneMask = LayerMask.GetMask(new string[] {"Default"});
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
                     {
                         Destroy(hit.transform.gameObject);
                     }
 
                     // destroy remove sprite
-                    Destroy(spawnedObject);
+                    //Destroy(spawnedObject);
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 }
 
                 // forget currently manipulated object
                 spawnedObject = null;
             }
-            
         }
+        else
+        {
+            // out of game zone
+            if (removeMode)
+            {
+                Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
+            }
+            else if (spawnedObject != null)
+            {
+                spawnedObjectRenderer.material = TransparentMaterial;
+            }
+        }
+
+        
+            
+        
     }
 
     private void SpawnObject(GameObject gameObject)
@@ -121,6 +163,11 @@ public class HudManager : MonoBehaviour {
         {
             Destroy(spawnedObject);
         }
+        removeMode = false;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
         spawnedObject = Instantiate(gameObject, mousePosition, Quaternion.identity);
+        spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
+        spawnedObjectRealMaterial = spawnedObjectRenderer.material;
     }
 }
