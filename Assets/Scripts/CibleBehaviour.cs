@@ -19,8 +19,9 @@ public class CibleBehaviour : MonoBehaviour {
 		if (collider.tag == "Balle") {
 			Debug.Log ("la balle touche la cible");
 
-			gameManager.addScore (1);
-			gameManager.launchModeEdit ();
+			gameManager.cibleTouched();
+            
+			
 
 		} else {
 			Debug.Log ("autre chose touche la cible ?!? (" + collider.name + ")" );
