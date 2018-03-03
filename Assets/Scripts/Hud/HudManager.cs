@@ -122,7 +122,7 @@ public class HudManager : MonoBehaviour {
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
                     {
                         Destroy(hit.transform.gameObject);
-						gm.deleteTime (10);
+						gm.useDelete ();
                     }
 
                     // change remove sprite
