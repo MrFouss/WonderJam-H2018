@@ -100,6 +100,11 @@ public class HudManager : MonoBehaviour {
             // check if wheel active and rotate object
             float wheel = Input.mouseScrollDelta.y;
             spawnedObject.transform.Rotate(Vector3.forward, wheel * rotationRate);
+
+			if (Input.GetMouseButtonDown (1)) {
+				Destroy(spawnedObject);
+				spawnedObject = null;
+			}
         }
 
         // check if mouse in game zone
@@ -108,55 +113,58 @@ public class HudManager : MonoBehaviour {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out gameZoneHit, Mathf.Infinity, gameZoneMask))
         {
             // in game zone
-            if (removeMode)
-            {
-                // remove mode
-                Cursor.SetCursor(RemoveTexture, Vector2.zero, CursorMode.Auto);
+			if (removeMode) {
+				// remove mode
+				Cursor.SetCursor (RemoveTexture, Vector2.zero, CursorMode.Auto);
 
-                if (Input.GetMouseButtonDown(0))
-                {
-                    removeMode = false;
-                    // check what needs to be removed
-                    RaycastHit hit = new RaycastHit();
-                    int nonGameZoneMask = LayerMask.GetMask(new string[] { "Default" });
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
-                    {
-                        Destroy(hit.transform.gameObject);
+				if (Input.GetMouseButtonDown (0)) {
+					removeMode = false;
+					// check what needs to be removed
+					RaycastHit hit = new RaycastHit ();
+					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
+					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
+						Destroy (hit.transform.gameObject);
 						gm.useDelete ();
-                    }
+					}
 
-                    // change remove sprite
-                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-                }
+					// change remove sprite
+					Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+				}
 
-            }
-            else if (spawnedObject != null)
-            {
-                // manipulate an object
-                CollisionChecker check = spawnedObject.GetComponent<CollisionChecker>();
-                if (check.collisions == 0 && check.triggers == 0)
-                {
-                    spawnedObjectRenderer.material = spawnedObjectRealMaterial;
+			} else if (spawnedObject != null) {
+				// manipulate an object
+				CollisionChecker check = spawnedObject.GetComponent<CollisionChecker> ();
+				if (check.collisions == 0 && check.triggers == 0) {
+					spawnedObjectRenderer.material = spawnedObjectRealMaterial;
                     
-                    // check if left mouse button clicked
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        // forget currently manipulated object
-                        spawnedObject = null;
-                    }
-                } else
-                {
-                    spawnedObjectRenderer.material = TransparentMaterial;
-                }
-            }
-			else if (Input.GetMouseButtonDown(0) && gm.editionMode) {
-				// check what needs to be moved
-				RaycastHit hit = new RaycastHit();
-				int nonGameZoneMask = LayerMask.GetMask(new string[] { "Default" });
-				if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
-				{
-					if(hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
-						MoveObject (hit.transform.gameObject);
+					// check if left mouse button clicked
+					if (Input.GetMouseButtonDown (0)) {
+						// forget currently manipulated object
+						spawnedObject = null;
+					}
+				} else {
+					spawnedObjectRenderer.material = TransparentMaterial;
+				}
+			} else if (gm.editionMode) {
+
+				if (Input.GetMouseButtonDown (0)) {
+					// check what needs to be moved
+					RaycastHit hit = new RaycastHit ();
+					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
+					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
+						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
+							MoveObject (hit.transform.gameObject);
+						}
+					}
+				} else if (Input.GetMouseButtonDown (1)) {
+					// check what needs to be moved
+					RaycastHit hit = new RaycastHit ();
+					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
+					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
+						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
+							Destroy (hit.transform.gameObject);
+							gm.useDelete ();
+						}
 					}
 				}
 			}
