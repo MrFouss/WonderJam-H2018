@@ -24,7 +24,7 @@ public class CibleBehaviour : MonoBehaviour {
 			
 
 		} else {
-			Debug.Log ("autre chose touche la cible ?!? (" + collider.name + ")" );
+            gameManager.changeCible();
 		}
 	}
 }
