@@ -122,7 +122,7 @@ public class HudManager : MonoBehaviour {
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
                     {
                         Destroy(hit.transform.gameObject);
-						gm.deleteTime (10);
+						gm.useDelete ();
                     }
 
                     // change remove sprite
@@ -168,16 +168,20 @@ public class HudManager : MonoBehaviour {
 
     private void SpawnObject(GameObject gameObject)
     {
-        // destroy currently manipulated object to replace it
-        if (spawnedObject != null)
-        {
-            Destroy(spawnedObject);
-        }
-        removeMode = false;
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
-        spawnedObject = Instantiate(gameObject, mousePosition, Quaternion.identity);
-        spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
-        spawnedObjectRealMaterial = spawnedObjectRenderer.material;
+		if (gm.editionMode) {
+			// destroy currently manipulated object to replace it
+			if (spawnedObject != null)
+			{
+				Destroy(spawnedObject);
+			}
+			removeMode = false;
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+			spawnedObject = Instantiate(gameObject, mousePosition, Quaternion.identity);
+			spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
+			spawnedObjectRealMaterial = spawnedObjectRenderer.material;
+		}
+      
     }
 }

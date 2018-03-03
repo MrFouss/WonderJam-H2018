@@ -3,31 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PistonBehaviour : MonoBehaviour {
-	public float deplacement;
+	public float deplacementMax;
 	public float tempsExtension;
 	public float tempsRepli;
 	public float tempsPause;
 	public AudioClip sonActivation;
 
-	private float tempsFin;
+    private float deplacementRepli;
+    private float tempsFin;
 	private PistonEtat etat;
-	private Vector3 positionExtension;
-	private Vector3 positionRepli;
 	private Rigidbody rb;
-	private Vector3 vitesseExtension;
-	private Vector3 vitesseRepli;
+	private float vitesseExtension;
+	private float vitesseRepli;
 	private bool doitEtreEnclanche;
 	public bool actif;
 	private AudioSource source;
 	private GameManager gameManager;
 
-
-
-
-
-
 	void Awake () {
-    
         source = GetComponent<AudioSource>();
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 		gameManager.myDelegate += setActif;
@@ -39,11 +32,10 @@ public class PistonBehaviour : MonoBehaviour {
 		Debug.Log ("mode EXTENSION");
 		etat = PistonEtat.REPLI;
 		tempsFin = -1.0f;
-		positionExtension = transform.position + transform.up * deplacement;
-		positionRepli = transform.position;
+        deplacementRepli = (transform.position - this.transform.parent.position).magnitude;
 		rb = GetComponent<Rigidbody> ();
-		vitesseExtension = transform.up * deplacement / tempsExtension;
-		vitesseRepli = -transform.up * deplacement / tempsRepli;
+		vitesseExtension = deplacementMax / tempsExtension;
+		vitesseRepli = -deplacementMax / tempsRepli;
 		doitEtreEnclanche = false;
 		actif = false;
 	}
@@ -57,7 +49,7 @@ public class PistonBehaviour : MonoBehaviour {
 				etat = PistonEtat.PAUSE;
 				tempsFin = Time.time + tempsPause;
 				rb.velocity = Vector3.zero;
-				transform.position = positionExtension;
+				transform.position = transform.parent.position + transform.parent.up*deplacementMax;
 				doitEtreEnclanche = false;
 				break;
 			case PistonEtat.PAUSE:
@@ -65,16 +57,16 @@ public class PistonBehaviour : MonoBehaviour {
 				etat = PistonEtat.REPLI;
 				tempsFin = Time.time + tempsRepli;
 				rb.velocity = Vector3.zero;
-				rb.AddForce (vitesseRepli, ForceMode.VelocityChange);
+				rb.AddForce (transform.up * vitesseRepli, ForceMode.VelocityChange);
 				break;
 			case PistonEtat.REPLI:
 				rb.velocity = Vector3.zero;
-				transform.position = positionRepli;
-				if(doitEtreEnclanche && actif){
+                transform.position = transform.parent.position + transform.parent.up * deplacementRepli;
+                if (doitEtreEnclanche && actif){
 					Debug.Log ("mode EXTENSION");
 					etat = PistonEtat.EXTENSION;
 					tempsFin = Time.time + tempsExtension;
-					rb.AddForce (vitesseExtension, ForceMode.VelocityChange);
+					rb.AddForce (transform.up * vitesseExtension, ForceMode.VelocityChange);
 					source.PlayOneShot(sonActivation);
 				}
 				break;
@@ -87,7 +79,7 @@ public class PistonBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider collider){
-		if (collider.tag == "Balle" && etat == PistonEtat.REPLI) {
+		if (collider.tag == "Balle" && etat == PistonEtat.REPLI && actif) {
 			this.doitEtreEnclanche = true;
 		}
 	}
