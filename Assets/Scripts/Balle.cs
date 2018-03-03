@@ -6,10 +6,9 @@ public class Balle : MonoBehaviour {
 
 
 	private RigidbodyConstraints  defaultRigid;
-	public Vector3 defaultPos;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		defaultRigid = GetComponent<Rigidbody> ().constraints;
 	}
 	
@@ -20,9 +19,6 @@ public class Balle : MonoBehaviour {
 		}
 		if(Input.GetKeyDown(KeyCode.B)){
 			restartBalle();
-		}
-		if(Input.GetKeyDown(KeyCode.C)){
-			resetPosBalle();
 		}
 	}
 
@@ -36,7 +32,7 @@ public class Balle : MonoBehaviour {
 	}
 		
 
-	public void resetPosBalle(){
+	public void resetPosBalle(Vector3 defaultPos){
 		stopBalle ();
 		GetComponent<Transform> ().position = defaultPos;
 	}
