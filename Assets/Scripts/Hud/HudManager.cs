@@ -23,6 +23,7 @@ public class HudManager : MonoBehaviour {
     private bool removeMode = false;
     private Vector3 mousePosition;
     private GameObject spawnedObject;
+//	private GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
     public void UpdateScoreText(int score)
     {

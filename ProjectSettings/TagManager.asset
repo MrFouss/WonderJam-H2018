@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Balle
+  - HUD
+  - GameManager
   layers:
   - Default
   - TransparentFX

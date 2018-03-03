@@ -15,6 +15,7 @@ public class PistonBehaviour : MonoBehaviour {
 	private Vector3 vitesseExtension;
 	private Vector3 vitesseRepli;
 	private bool doitEtreEnclanche;
+	public bool activate;
 
 	// Use this for initialization
 	void Start () {
@@ -63,9 +64,17 @@ public class PistonBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "Player") {
+		if (collider.tag == "Balle" && activate) {
 			this.doitEtreEnclanche = true;
 		}
+	}
+
+	public void activatePiston(){
+		activate = true;
+	}
+
+	public void desactivatePiston(){
+		activate = false;
 	}
 }
 
