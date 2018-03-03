@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	public int score;
 	private HudManager hud;
     public GameObject cible;
-    public GameObject cibleObj;
+    private GameObject cibleObj;
 	private Balle balle;
 
 	public delegate void MyDelegate(bool actif);
