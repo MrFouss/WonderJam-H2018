@@ -27,6 +27,7 @@ public class HudManager : MonoBehaviour {
     private GameObject spawnedObject;
     private MeshRenderer spawnedObjectRenderer;
     private Material spawnedObjectRealMaterial;
+	private GameManager gm;
 
     public void UpdateScoreText(int score)
     {
@@ -38,6 +39,7 @@ public class HudManager : MonoBehaviour {
         int min = (int)remainingTimeInSeconds / 60;
         int sec = (int)remainingTimeInSeconds % 60;
         TimerText.text = (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
+		gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
     }
 
     public void BallLaucherButtonClick()
@@ -77,6 +79,7 @@ public class HudManager : MonoBehaviour {
         if (spawnedObject != null)
         {
             Destroy(spawnedObject);
+
         }
         Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
@@ -119,6 +122,7 @@ public class HudManager : MonoBehaviour {
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
                     {
                         Destroy(hit.transform.gameObject);
+						gm.deleteTime (10);
                     }
 
                     // change remove sprite
