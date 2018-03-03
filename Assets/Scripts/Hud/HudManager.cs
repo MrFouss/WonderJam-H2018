@@ -130,7 +130,7 @@ public class HudManager : MonoBehaviour {
             {
                 // manipulate na object
                 CollisionChecker check = spawnedObject.GetComponent<CollisionChecker>();
-                if (check.collisions == 0 && check.triggers == 0)
+                if (/*check.collisions == 0 && check.triggers == 0*/true)
                 {
                     spawnedObjectRenderer.material = spawnedObjectRealMaterial;
                     
