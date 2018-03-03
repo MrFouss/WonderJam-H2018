@@ -7,6 +7,8 @@ public class PistonBehaviour : MonoBehaviour {
 	public float tempsExtension;
 	public float tempsRepli;
 	public float tempsPause;
+	public AudioClip sonActivation;
+
 	private float tempsFin;
 	private PistonEtat etat;
 	private Vector3 positionExtension;
@@ -16,6 +18,12 @@ public class PistonBehaviour : MonoBehaviour {
 	private Vector3 vitesseRepli;
 	private bool doitEtreEnclanche;
 	private bool actif;
+	private AudioSource source;
+
+	void Awake () {
+    
+        source = GetComponent<AudioSource>();
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -58,6 +66,7 @@ public class PistonBehaviour : MonoBehaviour {
 					etat = PistonEtat.EXTENSION;
 					tempsFin = Time.time + tempsExtension;
 					rb.AddForce (vitesseExtension, ForceMode.VelocityChange);
+					source.PlayOneShot(sonActivation);
 				}
 				break;
 			}
