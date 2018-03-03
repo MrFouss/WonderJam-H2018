@@ -149,7 +149,7 @@ public class HudManager : MonoBehaviour {
                     spawnedObjectRenderer.material = TransparentMaterial;
                 }
             }
-			else if (Input.GetMouseButtonDown(0)) {
+			else if (Input.GetMouseButtonDown(0) && gm.editionMode) {
 				// check what needs to be moved
 				RaycastHit hit = new RaycastHit();
 				int nonGameZoneMask = LayerMask.GetMask(new string[] { "Default" });
