@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 82809775747992240}
   - component: {fileID: 114052046587749390}
   - component: {fileID: 114321221876443064}
+  - component: {fileID: 114100237503924540}
   m_Layer: 0
   m_Name: MurSegment
   m_TagString: Untagged
@@ -195,6 +196,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22d9055c53f298a469245120ceacc999, type: 3}
   - {fileID: 8300000, guid: 1f2dd32bee7353b43bc66fb45c43e7cf, type: 3}
   particle: {fileID: 4578215471601812, guid: 4059b89b43bb58c4b82fdc78f575e31e, type: 2}
+  profile: {fileID: 0}
+--- !u!114 &114100237503924540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1280104670058072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e03c021b8360ad41b1ce4ef4e64bb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  canUpdate: 0
 --- !u!114 &114321221876443064
 MonoBehaviour:
   m_ObjectHideFlags: 1
