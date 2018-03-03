@@ -115,35 +115,37 @@ public class HudManager : MonoBehaviour {
                 if (check.collisions == 0 && check.triggers == 0)
                 {
                     spawnedObjectRenderer.material = spawnedObjectRealMaterial;
+                    
+                    // check if left mouse button clicked
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        // if trying to remove an object
+                        if (removeMode)
+                        {
+                            removeMode = false;
+                            // check what needs to be removed
+                            RaycastHit hit = new RaycastHit();
+                            int nonGameZoneMask = LayerMask.GetMask(new string[] {"Default"});
+                            if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
+                            {
+                                Destroy(hit.transform.gameObject);
+                            }
+
+                            // destroy remove sprite
+                            //Destroy(spawnedObject);
+                            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                        }
+
+                        // forget currently manipulated object
+                        spawnedObject = null;
+                    }
                 } else
                 {
                     spawnedObjectRenderer.material = TransparentMaterial;
                 }
             }
             
-            // check if left mouse button clicked
-            if (Input.GetMouseButtonDown(0))
-            {
-                // if trying to remove an object
-                if (removeMode)
-                {
-                    removeMode = false;
-                    // check what needs to be removed
-                    RaycastHit hit = new RaycastHit();
-                    int nonGameZoneMask = LayerMask.GetMask(new string[] {"Default"});
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
-                    {
-                        Destroy(hit.transform.gameObject);
-                    }
-
-                    // destroy remove sprite
-                    //Destroy(spawnedObject);
-                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-                }
-
-                // forget currently manipulated object
-                spawnedObject = null;
-            }
+            
         }
         else
         {

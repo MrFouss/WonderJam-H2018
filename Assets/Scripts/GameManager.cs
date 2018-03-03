@@ -45,14 +45,19 @@ public class GameManager : MonoBehaviour {
 
 	public void launchGame(){
 		edtionMode = false;
-		myDelegate (true);
+		if (myDelegate != null) {
+			myDelegate (true);
+		}
 		balle.restartBalle ();
 
 	}
 
 	public void launchModeEdit(){
 		edtionMode = true;
-		myDelegate (false);
+		if (myDelegate != null) {
+			myDelegate (false);
+		}
+
 		balle.resetPosBalle (balleStartPos);
 
 
