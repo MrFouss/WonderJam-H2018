@@ -222,14 +222,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7442b590748853e47978b5628168be28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultPos: {x: 0, y: 0, z: 0}
 --- !u!135 &135283255704250248
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691889111766664}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7a6be38734bb6754d8aa09d83b8b8cf3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
