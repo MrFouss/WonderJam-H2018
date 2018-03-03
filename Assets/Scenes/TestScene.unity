@@ -152,6 +152,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4215615742416294, guid: d4ef537b28df38a4bb3e0c6c68d89489, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215615742416294, guid: d4ef537b28df38a4bb3e0c6c68d89489, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4ef537b28df38a4bb3e0c6c68d89489, type: 2}
   m_IsPrefabParent: 0
@@ -278,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7442b590748853e47978b5628168be28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRigid: 0
   defaultPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1793139508
 GameObject:

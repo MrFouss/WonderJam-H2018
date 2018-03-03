@@ -5,7 +5,7 @@ using UnityEngine;
 public class Balle : MonoBehaviour {
 
 
-	public RigidbodyConstraints  defaultRigid;
+	private RigidbodyConstraints  defaultRigid;
 	public Vector3 defaultPos;
 
 	// Use this for initialization
@@ -37,6 +37,7 @@ public class Balle : MonoBehaviour {
 		
 
 	public void resetPosBalle(){
+		stopBalle ();
 		GetComponent<Transform> ().position = defaultPos;
 	}
 }
