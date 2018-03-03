@@ -69,7 +69,7 @@ public class PistonBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "Player") {
+		if (collider.tag == "Balle") {
 			this.doitEtreEnclanche = true;
 		}
 	}
