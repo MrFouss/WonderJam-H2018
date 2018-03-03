@@ -372,7 +372,7 @@ Prefab:
     - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
         type: 2}
       propertyPath: timeSec
-      value: 5
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec91a57049687f84592d27c12db69420, type: 2}
