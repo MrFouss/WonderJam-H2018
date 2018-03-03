@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
+		if (timeSec == 0) {
+
+		}
 
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			if (edtionMode) {
