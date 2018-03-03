@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4578215471601812}
   - component: {fileID: 198494658993027994}
   - component: {fileID: 199477148543101898}
+  - component: {fileID: 114941394831695646}
   m_Layer: 0
   m_Name: MurParticle
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114941394831695646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1829539334425962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d800a135f4be560448dea73b8978634f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198494658993027994
 ParticleSystem:
   m_ObjectHideFlags: 1
