@@ -107,10 +107,28 @@ public class HudManager : MonoBehaviour {
             // in game zone
             if (removeMode)
             {
+                // remove mode
                 Cursor.SetCursor(RemoveTexture, Vector2.zero, CursorMode.Auto);
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    removeMode = false;
+                    // check what needs to be removed
+                    RaycastHit hit = new RaycastHit();
+                    int nonGameZoneMask = LayerMask.GetMask(new string[] { "Default" });
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
+                    {
+                        Destroy(hit.transform.gameObject);
+                    }
+
+                    // change remove sprite
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                }
+
             }
             else if (spawnedObject != null)
             {
+                // manipulate na object
                 CollisionChecker check = spawnedObject.GetComponent<CollisionChecker>();
                 if (check.collisions == 0 && check.triggers == 0)
                 {
@@ -119,23 +137,6 @@ public class HudManager : MonoBehaviour {
                     // check if left mouse button clicked
                     if (Input.GetMouseButtonDown(0))
                     {
-                        // if trying to remove an object
-                        if (removeMode)
-                        {
-                            removeMode = false;
-                            // check what needs to be removed
-                            RaycastHit hit = new RaycastHit();
-                            int nonGameZoneMask = LayerMask.GetMask(new string[] {"Default"});
-                            if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
-                            {
-                                Destroy(hit.transform.gameObject);
-                            }
-
-                            // destroy remove sprite
-                            //Destroy(spawnedObject);
-                            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-                        }
-
                         // forget currently manipulated object
                         spawnedObject = null;
                     }
@@ -144,8 +145,6 @@ public class HudManager : MonoBehaviour {
                     spawnedObjectRenderer.material = TransparentMaterial;
                 }
             }
-            
-            
         }
         else
         {
