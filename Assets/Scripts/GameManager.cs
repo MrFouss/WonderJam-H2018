@@ -1,19 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
 	public float timeSec;
 	public Vector3 balleStartPos;
-	public bool edtionMode;
+	public bool editionMode;
 	public int score;
 	private HudManager hud;
     public GameObject cible;
     private GameObject cibleObj;
 	private Balle balle;
+    public GameObject gameZone;
+    private float Xmin;
+    private float Xmax;
+    private float Ymin;
+    private float Ymax;
 
-	public delegate void MyDelegate(bool actif);
+
+    public delegate void MyDelegate(bool actif);
+
 	public  MyDelegate myDelegate;
 
 
@@ -22,6 +30,10 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		hud = GameObject.FindGameObjectWithTag ("HUD").GetComponent<HudManager> ();
 		balle = GameObject.FindGameObjectWithTag ("Balle").GetComponent<Balle> ();
+        Xmin = gameZone.transform.position.x - gameZone.transform.localScale.x/2;
+        Xmax = gameZone.transform.position.x + gameZone.transform.localScale.x/2;
+        Ymin = gameZone.transform.position.y - gameZone.transform.localScale.y/2;
+        Ymax = gameZone.transform.position.y + gameZone.transform.localScale.y/2;
         changeCible();
         
 		hud.UpdateScoreText (0);
@@ -33,22 +45,29 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
-		if (timeSec == 0) {
+        
+        if (timeSec <= 0.0f) {
+            SceneManager.LoadScene("GameOverScene");
+        }
 
-		}
+		if (Input.GetKeyUp (KeyCode.Tab)) {
+            
+			if (editionMode) {
+                Debug.Log("launchGame");
 
-		if (Input.GetKeyDown (KeyCode.Tab)) {
-			if (edtionMode) {
-				launchGame ();
+                launchGame ();
 			} else {
-				launchModeEdit ();
+                Debug.Log("launchEdit");
+                launchModeEdit ();
 			}
 		}
 	}
 
 	public void launchGame(){
-		edtionMode = false;
-		if (myDelegate != null) {
+        
+        editionMode = false;
+        Debug.Log(editionMode);
+        if (myDelegate != null) {
 			myDelegate (true);
 		}
 		balle.restartBalle ();
@@ -56,7 +75,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void launchModeEdit(){
-		edtionMode = true;
+        editionMode = true;
 		if (myDelegate != null) {
 			myDelegate (false);
 		}
@@ -68,15 +87,16 @@ public class GameManager : MonoBehaviour {
     public void cibleTouched()
     {
         addScore(1);
-        launchModeEdit();
         changeCible();
-
+        launchModeEdit();
     }
     public void changeCible()
     {
-        Vector3 position = new Vector3(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f),0);
-        Destroy(cibleObj);
-        cibleObj = Instantiate(cible, position, Quaternion.identity);
+        
+            Vector3 position = new Vector3(Random.Range(Xmin, Xmax), Random.Range(Ymin, Ymax), 0);
+            Destroy(cibleObj);
+            cibleObj = Instantiate(cible, position, Quaternion.identity);
+        
     }
 
 	public void addScore(int score){
