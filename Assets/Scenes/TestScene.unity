@@ -337,6 +337,11 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!1 &972516746 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1220699912685918, guid: d4ef537b28df38a4bb3e0c6c68d89489,
+    type: 2}
+  m_PrefabInternal: {fileID: 947165207}
 --- !u!1001 &1006056769
 Prefab:
   m_ObjectHideFlags: 0

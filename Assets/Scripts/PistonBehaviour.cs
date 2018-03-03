@@ -13,20 +13,14 @@ public class PistonBehaviour : MonoBehaviour {
     private float tempsFin;
 	private PistonEtat etat;
 	private Rigidbody rb;
-	private Vector3 vitesseExtension;
-	private Vector3 vitesseRepli;
+	private float vitesseExtension;
+	private float vitesseRepli;
 	private bool doitEtreEnclanche;
 	public bool actif;
 	private AudioSource source;
 	private GameManager gameManager;
 
-
-
-
-
-
 	void Awake () {
-    
         source = GetComponent<AudioSource>();
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 		gameManager.myDelegate += setActif;
@@ -40,8 +34,8 @@ public class PistonBehaviour : MonoBehaviour {
 		tempsFin = -1.0f;
         deplacementRepli = (transform.position - this.transform.parent.position).magnitude;
 		rb = GetComponent<Rigidbody> ();
-		vitesseExtension = transform.up * deplacementMax / tempsExtension;
-		vitesseRepli = -transform.up * deplacementMax / tempsRepli;
+		vitesseExtension = deplacementMax / tempsExtension;
+		vitesseRepli = -deplacementMax / tempsRepli;
 		doitEtreEnclanche = false;
 		actif = false;
 	}
@@ -63,7 +57,7 @@ public class PistonBehaviour : MonoBehaviour {
 				etat = PistonEtat.REPLI;
 				tempsFin = Time.time + tempsRepli;
 				rb.velocity = Vector3.zero;
-				rb.AddForce (vitesseRepli, ForceMode.VelocityChange);
+				rb.AddForce (transform.up * vitesseRepli, ForceMode.VelocityChange);
 				break;
 			case PistonEtat.REPLI:
 				rb.velocity = Vector3.zero;
@@ -72,7 +66,7 @@ public class PistonBehaviour : MonoBehaviour {
 					Debug.Log ("mode EXTENSION");
 					etat = PistonEtat.EXTENSION;
 					tempsFin = Time.time + tempsExtension;
-					rb.AddForce (vitesseExtension, ForceMode.VelocityChange);
+					rb.AddForce (transform.up * vitesseExtension, ForceMode.VelocityChange);
 					source.PlayOneShot(sonActivation);
 				}
 				break;
@@ -85,7 +79,7 @@ public class PistonBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider collider){
-		if (collider.tag == "Balle" && etat == PistonEtat.REPLI) {
+		if (collider.tag == "Balle" && etat == PistonEtat.REPLI && actif) {
 			this.doitEtreEnclanche = true;
 		}
 	}
