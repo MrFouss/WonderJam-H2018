@@ -7,6 +7,8 @@ public class PistonBehaviour : MonoBehaviour {
 	public float tempsExtension;
 	public float tempsRepli;
 	public float tempsPause;
+	public AudioClip sonActivation;
+
 	private float tempsFin;
 	private PistonEtat etat;
 	private Vector3 positionExtension;
@@ -15,7 +17,13 @@ public class PistonBehaviour : MonoBehaviour {
 	private Vector3 vitesseExtension;
 	private Vector3 vitesseRepli;
 	private bool doitEtreEnclanche;
-	public bool activate;
+	private bool actif;
+	private AudioSource source;
+
+	void Awake () {
+    
+        source = GetComponent<AudioSource>();
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +36,7 @@ public class PistonBehaviour : MonoBehaviour {
 		vitesseExtension = transform.up * deplacement / tempsExtension;
 		vitesseRepli = -transform.up * deplacement / tempsRepli;
 		doitEtreEnclanche = false;
+		actif = false;
 	}
 	
 	void FixedUpdate () {
@@ -52,30 +61,28 @@ public class PistonBehaviour : MonoBehaviour {
 			case PistonEtat.REPLI:
 				rb.velocity = Vector3.zero;
 				transform.position = positionRepli;
-				if(doitEtreEnclanche){
+				if(doitEtreEnclanche && actif){
 					Debug.Log ("mode EXTENSION");
 					etat = PistonEtat.EXTENSION;
 					tempsFin = Time.time + tempsExtension;
 					rb.AddForce (vitesseExtension, ForceMode.VelocityChange);
+					source.PlayOneShot(sonActivation);
 				}
 				break;
 			}
 		}
 	}
 
+	public void setActif(bool actif){
+		this.actif = actif;
+	}
+
 	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "Balle" && activate) {
+		if (collider.tag == "Balle") {
 			this.doitEtreEnclanche = true;
 		}
 	}
 
-	public void activatePiston(){
-		activate = true;
-	}
-
-	public void desactivatePiston(){
-		activate = false;
-	}
 }
 
 

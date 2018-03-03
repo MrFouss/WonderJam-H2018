@@ -37,14 +37,14 @@ public class GameManager : MonoBehaviour {
 
 	public void launchGame(){
 		foreach(PistonBehaviour piston in listPiston){
-			piston.activatePiston ();
+			//piston.activatePiston ();
 		}
 		balle.restartBalle ();
 	}
 
 	public void launchModeEdit(){
 		foreach(PistonBehaviour piston in listPiston){
-			piston.desactivatePiston ();
+		//	piston.desactivatePiston ();
 		}
 		balle.resetPosBalle (balleStartPos);
 
