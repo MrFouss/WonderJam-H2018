@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1402148495605060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0009998083, y: 0.21000016, z: 0.0069999993}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.4000003, y: 2.4000003, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -215,6 +215,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c8df9222184eda44ab7e3e271353f584, type: 3}
   - {fileID: 8300000, guid: d9a878ce0b6da3e4eb7eee4bca278939, type: 3}
   - {fileID: 8300000, guid: 1929fb8262dab45499a286112bec4e60, type: 3}
+  particle: {fileID: 4729881846988692, guid: a5c73d0824d388f45a2528544ff87e05, type: 2}
 --- !u!114 &114223123622214706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,6 +229,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisions: 0
   triggers: 0
+--- !u!114 &114600152257095256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d34c27353261e143b15cdd0315c6305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crashSounds:
+  - {fileID: 8300000, guid: 64a3d564051ec164dbbf078e1f4904ea, type: 3}
+  - {fileID: 8300000, guid: 7b5146f103751a144bbaaaa6546308ec, type: 3}
+  - {fileID: 8300000, guid: c8df9222184eda44ab7e3e271353f584, type: 3}
+  - {fileID: 8300000, guid: d9a878ce0b6da3e4eb7eee4bca278939, type: 3}
+  - {fileID: 8300000, guid: 1929fb8262dab45499a286112bec4e60, type: 3}
+  particle: {fileID: 4729881846988692, guid: a5c73d0824d388f45a2528544ff87e05, type: 2}
 --- !u!114 &114722175313879524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,21 +492,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
---- !u!114 &114600152257095256
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971666322698368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d34c27353261e143b15cdd0315c6305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crashSounds:
-  - {fileID: 8300000, guid: 64a3d564051ec164dbbf078e1f4904ea, type: 3}
-  - {fileID: 8300000, guid: 7b5146f103751a144bbaaaa6546308ec, type: 3}
-  - {fileID: 8300000, guid: c8df9222184eda44ab7e3e271353f584, type: 3}
-  - {fileID: 8300000, guid: d9a878ce0b6da3e4eb7eee4bca278939, type: 3}
-  - {fileID: 8300000, guid: 1929fb8262dab45499a286112bec4e60, type: 3}
-  particle: {fileID: 4729881846988692, guid: a5c73d0824d388f45a2528544ff87e05, type: 2}
