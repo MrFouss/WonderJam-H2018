@@ -7,16 +7,22 @@ public class GameManager : MonoBehaviour {
 	public float timeSec;
 	public Vector3 balleStartPos;
 	public bool edtionMode;
+	public int score;
 	private HudManager hud;
 	private Balle balle;
-	public List<PistonBehaviour> listPiston;
+
+	public delegate void MyDelegate(bool actif);
+	public  MyDelegate myDelegate;
+
+
 
 	// Use this for initialization
 	void Start () {
 		hud = GameObject.FindGameObjectWithTag ("HUD").GetComponent<HudManager> ();
 		balle = GameObject.FindGameObjectWithTag ("Balle").GetComponent<Balle> ();
+		hud.UpdateScoreText (0);
 		launchModeEdit ();
-		edtionMode = true;
+
 	}
 	
 	// Update is called once per frame
@@ -26,31 +32,30 @@ public class GameManager : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			if (edtionMode) {
-				edtionMode = false;
 				launchGame ();
 			} else {
-				edtionMode = true;
 				launchModeEdit ();
 			}
 		}
 	}
 
 	public void launchGame(){
-		foreach(PistonBehaviour piston in listPiston){
-			//piston.activatePiston ();
-		}
+		edtionMode = false;
+		myDelegate (true);
 		balle.restartBalle ();
+
 	}
 
 	public void launchModeEdit(){
-		foreach(PistonBehaviour piston in listPiston){
-		//	piston.desactivatePiston ();
-		}
+		edtionMode = true;
+		myDelegate (false);
 		balle.resetPosBalle (balleStartPos);
+
 
 	}
 
-	public void addPiston(PistonBehaviour piston){
-		
+	public void addScore(int score){
+		this.score += score;
+		hud.UpdateScoreText (this.score);
 	}
 }

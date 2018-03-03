@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CibleBehaviour : MonoBehaviour {
 
+	private GameManager gameManager;
+
 	// Use this for initialization
 	void Start () {
-		
+		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 	}
 	
 	// Update is called once per frame
@@ -16,7 +18,8 @@ public class CibleBehaviour : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider){
 		if (collider.tag == "Balle") {
-			Debug.Log ("la balle touche la cible");
+			gameManager.addScore (1);
+			gameManager.launchModeEdit ();
 		} else {
 			Debug.Log ("autre chose touche la cible ?!? (" + collider.name + ")" );
 		}

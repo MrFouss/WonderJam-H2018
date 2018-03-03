@@ -17,22 +17,17 @@ public class PistonBehaviour : MonoBehaviour {
 	private Vector3 vitesseExtension;
 	private Vector3 vitesseRepli;
 	private bool doitEtreEnclanche;
-	public bool actif;
+<<<<<<< HEAD
+	public bool activate;
+=======
+	private bool actif;
 	private AudioSource source;
-	private GameManager gameManager;
-
-
-
-
-
 
 	void Awake () {
     
         source = GetComponent<AudioSource>();
-		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
-		gameManager.myDelegate += setActif;
-
     }
+>>>>>>> c826ae2269d9f932d263ac2f15dc9201194387c9
 
 	// Use this for initialization
 	void Start () {
@@ -87,11 +82,22 @@ public class PistonBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
+<<<<<<< HEAD
+		if (collider.tag == "Balle" && activate) {
+=======
 		if (collider.tag == "Balle") {
+>>>>>>> c826ae2269d9f932d263ac2f15dc9201194387c9
 			this.doitEtreEnclanche = true;
 		}
 	}
 
+	public void activatePiston(){
+		activate = true;
+	}
+
+	public void desactivatePiston(){
+		activate = false;
+	}
 }
 
 
