@@ -18,6 +18,8 @@ public class HudManager : MonoBehaviour {
     public GameObject WallPrefab;
     public GameObject RemovePrefab;
 
+    public float rotationRate = 10;
+
     private bool removeMode = false;
     private Vector3 mousePosition;
     private GameObject spawnedObject;
@@ -81,6 +83,10 @@ public class HudManager : MonoBehaviour {
         {
             // update its position
             spawnedObject.transform.position = mousePosition;
+
+            // check if wheel active and rotate object
+            float wheel = Input.mouseScrollDelta.y;
+            spawnedObject.transform.Rotate(Vector3.forward, wheel * rotationRate);
 
             // check if left mouse button clicked
             if (Input.GetMouseButtonDown(0))
