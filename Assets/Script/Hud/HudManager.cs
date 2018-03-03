@@ -76,10 +76,9 @@ public class HudManager : MonoBehaviour {
     {
         // retrieve mouse position in world space + 50
         Vector2 mouseScreenPos = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, Camera.main.nearClipPlane));
-
-        Debug.Log(mouseScreenPos);
-
+        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, 0));
+        mousePosition.z = 0;
+        
         // if currently manipulating an object
         if (spawnedObject != null)
         {

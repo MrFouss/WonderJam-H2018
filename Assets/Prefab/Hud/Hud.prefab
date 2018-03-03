@@ -288,7 +288,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114826927823173278}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114760313620158940}
+        m_MethodName: TriangleTrampolineButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114330448974601322
@@ -615,7 +626,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114531306324901032}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114760313620158940}
+        m_MethodName: RectangleTrampolineButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114623860460736114
@@ -656,7 +678,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114265389760429878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114760313620158940}
+        m_MethodName: TargetButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114698640804973560
@@ -726,15 +759,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 114464475947589542}
   TimerText: {fileID: 114818553731260544}
-  HudSpace: {fileID: 0}
-  BallLauncherPrefab: {fileID: 0}
-  TargetPrefab: {fileID: 0}
-  RectangleTrampolinePrefab: {fileID: 0}
-  SphereTrampolinePrefab: {fileID: 0}
-  TriangleTrampolinePrefab: {fileID: 0}
-  WallPrefab: {fileID: 0}
+  BallLauncherPrefab: {fileID: 1160999106718682, guid: f6a254fafd535cf4dac4e2d2059e9f11,
+    type: 2}
+  TargetPrefab: {fileID: 1898643459909492, guid: 144427ab7a0346343a5549fe66568910,
+    type: 2}
+  RectangleTrampolinePrefab: {fileID: 1722072155167892, guid: a470d9246d41ca245a879ef5d874b772,
+    type: 2}
+  SphereTrampolinePrefab: {fileID: 1871646738347260, guid: a49a8851ae64f234780ca51fbd7c2e0f,
+    type: 2}
+  TriangleTrampolinePrefab: {fileID: 1402148495605060, guid: 33344cc0f2215b94ebbe78033221f469,
+    type: 2}
+  WallPrefab: {fileID: 1280104670058072, guid: f6b8d4eaed26a904ba44412473005258, type: 2}
   RemovePrefab: {fileID: 1465416471867582, guid: 628b13eaab13fca4790c3b5d1ac6886f,
     type: 2}
+  rotationRate: 10
 --- !u!114 &114818553731260544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -962,7 +1000,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114900265816838154}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114760313620158940}
+        m_MethodName: SphereTrampolineButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114966046442842238
