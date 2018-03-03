@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -33,8 +34,8 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
-		if (timeSec == 0) {
-
+		if (timeSec <= 0) {
+			SceneManager.LoadScene ("GameOverScene");
 		}
 
 		if (Input.GetKeyDown (KeyCode.Tab)) {
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour {
     {
         addScore(1);
         launchModeEdit();
+		addTime (30);
         changeCible();
 
     }
@@ -82,5 +84,13 @@ public class GameManager : MonoBehaviour {
 	public void addScore(int score){
 		this.score += score;
 		hud.UpdateScoreText (this.score);
+	}
+
+	public void deleteTime(float time){
+		timeSec -= time;
+	}
+
+	public void addTime(float time){
+		timeSec += time;
 	}
 }
