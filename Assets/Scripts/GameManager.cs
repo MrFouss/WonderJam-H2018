@@ -64,16 +64,11 @@ public class GameManager : MonoBehaviour {
         changeCible();
 
     }
-    private void changeCible()
+    public void changeCible()
     {
         Vector3 position = new Vector3(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f),0);
-
         Destroy(cibleObj);
         cibleObj = Instantiate(cible, position, Quaternion.identity);
-        Vector3 position2 = new Vector3(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f), 0);
-        
-        
-
     }
 
 	public void addScore(int score){
