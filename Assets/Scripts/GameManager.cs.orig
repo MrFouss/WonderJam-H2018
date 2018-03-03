@@ -13,23 +13,22 @@ public class GameManager : MonoBehaviour {
     public GameObject cible;
     private GameObject cibleObj;
 	private Balle balle;
+<<<<<<< HEAD
+
+	public delegate void MyDelegate(bool actif);
+=======
     public GameObject gameZone;
     private float Xmin;
     private float Xmax;
     private float Ymin;
     private float Ymax;
 
-	private AudioSource source;
-	public AudioClip sonActivation;
-
 
     public delegate void MyDelegate(bool actif);
 
+>>>>>>> a432b951e95c3e522d00fceebca1b426a5df28ec
 	public  MyDelegate myDelegate;
-	private bool sonPlay;
 
-	public int timePerdu;
-	public int timeGagneCible;
 
 
 	// Use this for initialization
@@ -41,28 +40,16 @@ public class GameManager : MonoBehaviour {
         Ymin = gameZone.transform.position.y - gameZone.transform.localScale.y/2;
         Ymax = gameZone.transform.position.y + gameZone.transform.localScale.y/2;
         changeCible();
-		source= GetComponent<AudioSource>();
+        
 		hud.UpdateScoreText (0);
 		launchModeEdit ();
-		sonPlay = true;
 
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
-
-		if (timeSec <= 12.1 && sonPlay) {
-			sonPlay = false;
-			source.PlayOneShot (sonActivation);
-		}
-
-		if (timeSec > 12.1 && !sonPlay) {
-			sonPlay = true;
-			source.Stop ();
-		}
-
 		if (timeSec <= 0) {
 			SceneManager.LoadScene ("GameOverScene");
 		}
@@ -83,7 +70,7 @@ public class GameManager : MonoBehaviour {
 	public void launchGame(){
         
         editionMode = false;
-//        Debug.Log(editionMode);
+        Debug.Log(editionMode);
         if (myDelegate != null) {
 			myDelegate (true);
 		}
@@ -104,7 +91,11 @@ public class GameManager : MonoBehaviour {
     public void cibleTouched()
     {
         addScore(1);
-		addTime (timeGagneCible);
+<<<<<<< HEAD
+        launchModeEdit();
+		addTime (30);
+=======
+>>>>>>> a432b951e95c3e522d00fceebca1b426a5df28ec
         changeCible();
         launchModeEdit();
     }
@@ -128,9 +119,5 @@ public class GameManager : MonoBehaviour {
 
 	public void addTime(float time){
 		timeSec += time;
-	}
-
-	public void useDelete(){
-		deleteTime (timePerdu);
 	}
 }
