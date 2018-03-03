@@ -138,7 +138,7 @@ public class HudManager : MonoBehaviour {
             }
             else if (spawnedObject != null)
             {
-                // manipulate na object
+                // manipulate an object
                 CollisionChecker check = spawnedObject.GetComponent<CollisionChecker>();
                 if (check.collisions == 0 && check.triggers == 0)
                 {
@@ -155,6 +155,17 @@ public class HudManager : MonoBehaviour {
                     spawnedObjectRenderer.material = TransparentMaterial;
                 }
             }
+			else if (Input.GetMouseButtonDown(0) && gm.editionMode) {
+				// check what needs to be moved
+				RaycastHit hit = new RaycastHit();
+				int nonGameZoneMask = LayerMask.GetMask(new string[] { "Default" });
+				if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask))
+				{
+					if(hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
+						MoveObject (hit.transform.gameObject);
+					}
+				}
+			}
         }
         else
         {
@@ -190,4 +201,11 @@ public class HudManager : MonoBehaviour {
 		}
       
     }
+
+	private void MoveObject(GameObject gameObject) {
+		spawnedObject = gameObject;
+		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
+		spawnedObjectRealMaterial = spawnedObjectRenderer.material;
+	}
 }

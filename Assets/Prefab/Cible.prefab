@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 54038153664374118}
   m_Layer: 0
   m_Name: Cible
-  m_TagString: Untagged
+  m_TagString: Cible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 64
@@ -59,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1e46e7c06198b564b8781595996b0a87, type: 2}
+  - {fileID: 2100000, guid: 6ccbde080e605c148949360dd0648666, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
