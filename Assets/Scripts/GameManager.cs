@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
 	public bool edtionMode;
 	public int score;
 	private HudManager hud;
+    public GameObject cible;
+    public GameObject cibleObj;
 	private Balle balle;
 
 	public delegate void MyDelegate(bool actif);
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		hud = GameObject.FindGameObjectWithTag ("HUD").GetComponent<HudManager> ();
 		balle = GameObject.FindGameObjectWithTag ("Balle").GetComponent<Balle> ();
+        changeCible();
+        
 		hud.UpdateScoreText (0);
 		launchModeEdit ();
 
@@ -53,6 +57,24 @@ public class GameManager : MonoBehaviour {
 
 
 	}
+    public void cibleTouched()
+    {
+        addScore(1);
+        launchModeEdit();
+        changeCible();
+
+    }
+    private void changeCible()
+    {
+        Vector3 position = new Vector3(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f),0);
+
+        Destroy(cibleObj);
+        cibleObj = Instantiate(cible, position, Quaternion.identity);
+        Vector3 position2 = new Vector3(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f), 0);
+        
+        
+
+    }
 
 	public void addScore(int score){
 		this.score += score;
