@@ -18,6 +18,7 @@ public class HudManager : MonoBehaviour {
     public GameObject WallPrefab;
     public Texture2D RemoveTexture;
     public Texture2D ImpossibleRemoveTexture;
+    public Texture2D DefaultCursorTexture;
     public Material TransparentMaterial;
     
     public float rotationRate = 10;
@@ -28,6 +29,11 @@ public class HudManager : MonoBehaviour {
     private MeshRenderer spawnedObjectRenderer;
     private Material spawnedObjectRealMaterial;
 	private GameManager gm;
+
+    private void Start()
+    {
+        Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+    }
 
     public void UpdateScoreText(int score)
     {
@@ -81,7 +87,7 @@ public class HudManager : MonoBehaviour {
             Destroy(spawnedObject);
 
         }
-        Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
+        //Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
@@ -111,7 +117,7 @@ public class HudManager : MonoBehaviour {
             if (removeMode)
             {
                 // remove mode
-                Cursor.SetCursor(RemoveTexture, Vector2.zero, CursorMode.Auto);
+                //Cursor.SetCursor(RemoveTexture, Vector2.zero, CursorMode.Auto);
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -126,7 +132,7 @@ public class HudManager : MonoBehaviour {
                     }
 
                     // change remove sprite
-                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                    //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 }
 
             }
@@ -155,7 +161,7 @@ public class HudManager : MonoBehaviour {
             // out of game zone
             if (removeMode)
             {
-                Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
+                //Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
             }
             else if (spawnedObject != null)
             {
@@ -176,7 +182,7 @@ public class HudManager : MonoBehaviour {
 				Destroy(spawnedObject);
 			}
 			removeMode = false;
-			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+			//Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
 			spawnedObject = Instantiate(gameObject, mousePosition, Quaternion.identity);
 			spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
