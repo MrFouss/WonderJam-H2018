@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CibleBehaviour : MonoBehaviour {
-
+    Random random;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +17,7 @@ public class CibleBehaviour : MonoBehaviour {
 	void OnTriggerEnter(Collider collider){
 		if (collider.tag == "Balle") {
 			Debug.Log ("la balle touche la cible");
+            
 		} else {
 			Debug.Log ("autre chose touche la cible ?!? (" + collider.name + ")" );
 		}
