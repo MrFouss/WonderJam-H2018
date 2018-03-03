@@ -371,6 +371,11 @@ Prefab:
       propertyPath: gameZone
       value: 
       objectReference: {fileID: 423808579}
+    - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
+        type: 2}
+      propertyPath: timeSec
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec91a57049687f84592d27c12db69420, type: 2}
   m_IsPrefabParent: 0
@@ -428,11 +433,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e83de97c5ff83a74d90bc9cfd26c5c05, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1421072446 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1220699912685918, guid: d4ef537b28df38a4bb3e0c6c68d89489,
-    type: 2}
-  m_PrefabInternal: {fileID: 114962961}
 --- !u!1 &1829889469
 GameObject:
   m_ObjectHideFlags: 0
