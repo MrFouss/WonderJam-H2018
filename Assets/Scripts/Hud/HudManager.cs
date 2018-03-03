@@ -111,7 +111,14 @@ public class HudManager : MonoBehaviour {
             }
             else if (spawnedObject != null)
             {
-                spawnedObjectRenderer.material = spawnedObjectRealMaterial;
+                CollisionChecker check = spawnedObject.GetComponent<CollisionChecker>();
+                if (check.collisions == 0 && check.triggers == 0)
+                {
+                    spawnedObjectRenderer.material = spawnedObjectRealMaterial;
+                } else
+                {
+                    spawnedObjectRenderer.material = TransparentMaterial;
+                }
             }
             
             // check if left mouse button clicked
@@ -148,11 +155,9 @@ public class HudManager : MonoBehaviour {
             else if (spawnedObject != null)
             {
                 spawnedObjectRenderer.material = TransparentMaterial;
+
             }
         }
-
-        
-            
         
     }
 
