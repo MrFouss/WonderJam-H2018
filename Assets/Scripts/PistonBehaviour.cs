@@ -15,6 +15,7 @@ public class PistonBehaviour : MonoBehaviour {
 	private Vector3 vitesseExtension;
 	private Vector3 vitesseRepli;
 	private bool doitEtreEnclanche;
+	private bool actif;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,7 @@ public class PistonBehaviour : MonoBehaviour {
 		vitesseExtension = transform.up * deplacement / tempsExtension;
 		vitesseRepli = -transform.up * deplacement / tempsRepli;
 		doitEtreEnclanche = false;
+		actif = false;
 	}
 	
 	void FixedUpdate () {
@@ -51,7 +53,7 @@ public class PistonBehaviour : MonoBehaviour {
 			case PistonEtat.REPLI:
 				rb.velocity = Vector3.zero;
 				transform.position = positionRepli;
-				if(doitEtreEnclanche){
+				if(doitEtreEnclanche && actif){
 					Debug.Log ("mode EXTENSION");
 					etat = PistonEtat.EXTENSION;
 					tempsFin = Time.time + tempsExtension;
@@ -60,6 +62,10 @@ public class PistonBehaviour : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	public void setActif(bool actif){
+		this.actif = actif;
 	}
 
 	void OnTriggerEnter(Collider collider){
