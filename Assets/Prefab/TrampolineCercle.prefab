@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 82102146906554914}
   - component: {fileID: 114159893108572116}
   - component: {fileID: 114347848170944954}
+  - component: {fileID: 114738820277643010}
   m_Layer: 0
   m_Name: TrampolineCercle
   m_TagString: Untagged
@@ -184,6 +185,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d9a878ce0b6da3e4eb7eee4bca278939, type: 3}
   - {fileID: 8300000, guid: 1929fb8262dab45499a286112bec4e60, type: 3}
   particle: {fileID: 4729881846988692, guid: a5c73d0824d388f45a2528544ff87e05, type: 2}
+  profile: {fileID: 0}
 --- !u!114 &114347848170944954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,6 +199,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisions: 0
   triggers: 0
+--- !u!114 &114738820277643010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871646738347260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e03c021b8360ad41b1ce4ef4e64bb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  canUpdate: 0
 --- !u!135 &135360683259518518
 SphereCollider:
   m_ObjectHideFlags: 1

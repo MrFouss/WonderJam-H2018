@@ -773,6 +773,8 @@ MonoBehaviour:
   RemoveTexture: {fileID: 2800000, guid: 57c1e27857de5e147a743a8231f7f995, type: 3}
   ImpossibleRemoveTexture: {fileID: 2800000, guid: f00cbbc57d6bb2a478af0db14d6ebca5,
     type: 3}
+  DefaultCursorTexture: {fileID: 2800000, guid: 20e3810238341164097fbe4231543738,
+    type: 3}
   TransparentMaterial: {fileID: 2100000, guid: db9c95a6e22f6aa46a893302b008d84e, type: 2}
   rotationRate: 10
 --- !u!114 &114818553731260544
