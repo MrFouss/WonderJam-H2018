@@ -16,7 +16,8 @@ public class CibleBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "Balle") {
+        Debug.Log("la balle touche la cible");
+        if (collider.tag == "Balle") {
 			Debug.Log ("la balle touche la cible");
 
 			gameManager.cibleTouched();
@@ -24,7 +25,10 @@ public class CibleBehaviour : MonoBehaviour {
 			
 
 		} else {
-            gameManager.changeCible();
+            if (!gameManager.editionMode)
+            {
+                gameManager.changeCible();
+            }
 		}
 	}
 }
