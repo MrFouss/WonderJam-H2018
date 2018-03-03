@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198086349156046328}
   - component: {fileID: 199902847440734326}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: BallDrops
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
