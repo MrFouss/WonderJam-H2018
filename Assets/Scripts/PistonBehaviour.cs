@@ -87,7 +87,7 @@ public class PistonBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "Balle") {
+		if (collider.tag == "Balle" && etat == PistonEtat.REPLI) {
 			this.doitEtreEnclanche = true;
 		}
 	}
