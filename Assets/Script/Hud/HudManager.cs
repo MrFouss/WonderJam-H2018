@@ -10,8 +10,6 @@ public class HudManager : MonoBehaviour {
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI TimerText;
 
-    public GameObject HudSpace;
-
     public GameObject BallLauncherPrefab;
     public GameObject TargetPrefab;
     public GameObject RectangleTrampolinePrefab;
@@ -74,27 +72,35 @@ public class HudManager : MonoBehaviour {
 
     private void OnGUI()
     {
+        // retrieve mouse position in world space + 50
         Vector2 mouseScreenPos = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, Camera.main.nearClipPlane+50));
+
+        // if currently manipulating an object
         if (spawnedObject != null)
         {
+            // update its position
             spawnedObject.transform.position = mousePosition;
 
+            // check if left mouse button clicked
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("game space");
+                // if trying to remove an object
                 if (removeMode)
                 {
                     removeMode = false;
+                    // check what needs to be removed
                     RaycastHit hit = new RaycastHit();
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out hit))
                     {
-                        Debug.Log("delete " + hit.transform.gameObject);
                         Destroy(hit.transform.gameObject);
                     }
-                    //spawnedObject.SetActive(true);
+
+                    // destroy remove sprite
                     Destroy(spawnedObject);
                 }
+
+                // forget currently manipulated object
                 spawnedObject = null;
             }
             
@@ -103,6 +109,7 @@ public class HudManager : MonoBehaviour {
 
     private void SpawnObject(GameObject gameObject)
     {
+        // destroy currently manipulated object to replace it
         if (spawnedObject != null)
         {
             Destroy(spawnedObject);
