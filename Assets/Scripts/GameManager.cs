@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 	public int score;
 	private HudManager hud;
     public GameObject cible;
+    public GameObject textPlay;
+    public GameObject textEdit;
     private GameObject cibleObj;
 	private Balle balle;
     public GameObject gameZone;
@@ -53,7 +55,9 @@ public class GameManager : MonoBehaviour {
         changeCible();
 		source= GetComponent<AudioSource>();
 		hud.UpdateScoreText (0);
-		launchModeEdit ();
+        textPlay.SetActive(false);
+        textEdit.SetActive(true);
+        launchModeEdit ();
 		sonPlay = true;
 
 	}
@@ -62,7 +66,16 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
-
+        if (editionMode)
+        {
+            textPlay.SetActive(false);
+            textEdit.SetActive(true);
+        }
+        else
+        {
+            textPlay.SetActive(true);
+            textEdit.SetActive(false);
+        }
 		if (timeSec <= 12.1 && sonPlay) {
 			sonPlay = false;
 			source.PlayOneShot (sonActivation);
@@ -81,7 +94,7 @@ public class GameManager : MonoBehaviour {
             
 			if (editionMode) {
                 Debug.Log("launchGame");
-
+                
                 launchGame ();
 			} else {
                 Debug.Log("launchEdit");
@@ -93,7 +106,9 @@ public class GameManager : MonoBehaviour {
 	public void launchGame(){
         
         editionMode = false;
-//        Debug.Log(editionMode);
+        
+        
+        //        Debug.Log(editionMode);
         if (myDelegate != null) {
 			myDelegate (true);
 		}
@@ -107,7 +122,10 @@ public class GameManager : MonoBehaviour {
 
 	public void launchModeEdit(){
         editionMode = true;
-		if (myDelegate != null) {
+        
+        
+
+        if (myDelegate != null) {
 			myDelegate (false);
 		}
 
