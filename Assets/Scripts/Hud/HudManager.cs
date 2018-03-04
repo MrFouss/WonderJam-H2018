@@ -96,6 +96,9 @@ public class HudManager : MonoBehaviour {
         //Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
 
+    public void TogglePlayPauseButtonClick() {
+        gm.ToggleGameEdit();
+    }
 
     private void Update()
     {
@@ -263,7 +266,7 @@ public class HudManager : MonoBehaviour {
 			go.GetComponent<ObjetInterraction> ().resetEvenement ();
 		}
 		Destroy (go);
-		Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+		removeHoverEffect ();
 	}
 
 	private void removeHoverEffect(){
