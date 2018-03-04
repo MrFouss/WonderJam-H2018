@@ -24,7 +24,8 @@ public class HudManager : MonoBehaviour {
     public float rotationRate = 10;
 
     private bool removeMode = false;
-	private bool wasClicked = true;
+	private bool wasLeftClick = true;
+	private bool wasRightClick = true;
 	private Vector3 mousePosition;
     private GameObject spawnedObject;
     private MeshRenderer spawnedObjectRenderer;
@@ -116,7 +117,7 @@ public class HudManager : MonoBehaviour {
             float wheel = Input.mouseScrollDelta.y;
             spawnedObject.transform.Rotate(Vector3.forward, wheel * rotationRate);
 
-			if (Input.GetMouseButtonDown (1)) {
+			if (isRightClick()) {
 				DestroyObjet(spawnedObject);
 				spawnedObject = null;
 			}
@@ -153,14 +154,9 @@ public class HudManager : MonoBehaviour {
 					spawnedObjectRenderer.material = spawnedObjectRealMaterial;
                     
 					// check if left mouse button clicked
-					if (Input.GetMouseButtonDown (0)) {
-						if (!wasClicked) {
-							wasClicked = true;
-							// forget currently manipulated object
-							spawnedObject = null;
-						}
-					} else {
-						wasClicked = false;
+					if (isLeftClick()) {
+						// forget currently manipulated object
+						spawnedObject = null;
 					}
 				} else {
 					spawnedObjectRenderer.material = TransparentMaterial;
@@ -185,23 +181,18 @@ public class HudManager : MonoBehaviour {
 							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (1.0f, 1.0f, 1.0f));
 						} else {
 							Cursor.SetCursor (ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
+							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (0.0f, 0.0f, 0.0f));
 						}
 
-						if (Input.GetMouseButton (0)) {
-							if (!wasClicked) {
-								wasClicked = true;
-								if (hit.transform.gameObject.GetComponent<ObjetInterraction> ().canUpdate) {
-									MoveObject (hit.transform.gameObject);
-								}
+						if (isLeftClick()) {
+							if (hit.transform.gameObject.GetComponent<ObjetInterraction> ().canUpdate) {
+								MoveObject (hit.transform.gameObject);
 							}
-						} else if (Input.GetMouseButton (1)) {
-							wasClicked = false;
+						} else if (isRightClick()) {
 							DestroyObjet (hit.transform.gameObject);
 							if (!hit.transform.gameObject.GetComponent<ObjetInterraction> ().canUpdate) {
 								gm.useDelete ();
 							}
-						} else {
-							wasClicked = false;
 						}
 					}
 				} else {
@@ -271,5 +262,29 @@ public class HudManager : MonoBehaviour {
 			Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
 			previousHovered = null;
 		}
+	}
+
+	private bool isLeftClick(){
+		if (Input.GetMouseButton (0)) {
+			if (!wasLeftClick) {
+				wasLeftClick = true;
+				return true;
+			}
+		} else {
+			wasLeftClick = false;
+		}
+		return false;
+	}
+
+	private bool isRightClick(){
+		if (Input.GetMouseButton (1)) {
+			if (!wasRightClick) {
+				wasRightClick = true;
+				return true;
+			}
+		} else {
+			wasRightClick = false;
+		}
+		return false;
 	}
 }
