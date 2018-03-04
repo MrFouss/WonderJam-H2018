@@ -99,9 +99,6 @@ public class GameManager : MonoBehaviour {
 
 
     void Update () {
-		timeSec -= Time.deltaTime;
-		hud.UpdateTimerText (timeSec);
-
         if (editionMode)
         {
             textPlay.SetActive(false);
@@ -240,5 +237,17 @@ public class GameManager : MonoBehaviour {
 		isGameActive = false;
 		gameController.submitPlayerScoring (score);
 		highScore = gameController.playerScoring.highScore;
+		Transform[] listTransform = MenuGameOver.GetComponentsInChildren<Transform> (true);
+
+		foreach (Transform t in listTransform) {
+			if (t.name.Equals ("Score")) {
+				t.GetComponent<UnityEngine.UI.Text> ().text = "Score : " + score;
+			}
+
+			if (t.name.Equals ("HighScore")) {
+				t.GetComponent<UnityEngine.UI.Text> ().text = "High Score : " + highScore;
+			}
+
+		}
 	}
 }
