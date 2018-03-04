@@ -152,7 +152,10 @@ public class GameManager : MonoBehaviour {
         addScore(1);
 		addTime (timeGagneCible);
         changeCible();
-		myaction (false);
+		if (myaction != null) {
+			myaction (false);
+		}
+
         launchModeEdit();
 
     }
