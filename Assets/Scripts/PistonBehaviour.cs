@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistonBehaviour : MonoBehaviour {
+public class PistonBehaviour : ObjetInterraction {
 	public float deplacementMax;
 	public float tempsExtension;
 	public float tempsRepli;
@@ -18,17 +18,18 @@ public class PistonBehaviour : MonoBehaviour {
 	private bool doitEtreEnclanche;
 	public bool actif;
 	private AudioSource source;
-	private GameManager gameManager;
+
+
 
 	void Awake () {
-        source = GetComponent<AudioSource>();
-		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
-		gameManager.myDelegate += setActif;
+		source = GetComponent<AudioSource>();
+
 
     }
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
+		base.Start ();
 		Debug.Log ("mode EXTENSION");
 		etat = PistonEtat.REPLI;
 		tempsFin = -1.0f;
@@ -38,6 +39,8 @@ public class PistonBehaviour : MonoBehaviour {
 		vitesseRepli = -deplacementMax / tempsRepli;
 		doitEtreEnclanche = false;
 		actif = false;
+		gameManager.myDelegate += setActif;
+
 	}
 	
 	void FixedUpdate () {
@@ -83,6 +86,8 @@ public class PistonBehaviour : MonoBehaviour {
 			this.doitEtreEnclanche = true;
 		}
 	}
+
+
 
 }
 

@@ -24,8 +24,12 @@ public class GameManager : MonoBehaviour {
 
 
     public delegate void MyDelegate(bool actif);
-
 	public  MyDelegate myDelegate;
+
+	public delegate void Myaction(bool actif);
+	public  Myaction myaction;
+
+
 	private bool sonPlay;
 
 	public int timePerdu;
@@ -107,6 +111,7 @@ public class GameManager : MonoBehaviour {
 		addTime (timeGagneCible);
         changeCible();
         launchModeEdit();
+		myaction (false);
     }
     public void changeCible()
     {
