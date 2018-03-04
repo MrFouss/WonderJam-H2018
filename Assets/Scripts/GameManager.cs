@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour {
 	public delegate void Myaction(bool actif);
 	public  Myaction myaction;
 
+	public delegate void MyactionColorDivise();
+	public  MyactionColorDivise myActionColorDivise;
+
+	public delegate void MyactionColorReset();
+	public  MyactionColorReset myactionColorReset;
+
 
 	private bool sonPlay;
 
@@ -91,6 +97,10 @@ public class GameManager : MonoBehaviour {
         if (myDelegate != null) {
 			myDelegate (true);
 		}
+		if (myactionColorReset != null) {
+			Debug.Log ("Launch");
+			myactionColorReset ();
+		}
 		balle.restartBalle ();
 
 	}
@@ -103,6 +113,12 @@ public class GameManager : MonoBehaviour {
 
 		balle.resetPosBalle (balleStartPos);
 
+		if (myActionColorDivise != null) {
+			Debug.Log ("Pause");
+			myActionColorDivise ();
+		}
+	
+
 
 	}
     public void cibleTouched()
@@ -110,8 +126,9 @@ public class GameManager : MonoBehaviour {
         addScore(1);
 		addTime (timeGagneCible);
         changeCible();
-        launchModeEdit();
 		myaction (false);
+        launchModeEdit();
+
     }
     public void changeCible()
     {
