@@ -160,8 +160,10 @@ public class HudManager : MonoBehaviour {
 					RaycastHit hit = new RaycastHit ();
 					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
 					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
-						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible" && hit.transform.gameObject.GetComponent<ObjetInterraction>().canUpdate) {
-							MoveObject (hit.transform.gameObject);
+						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible" && hit.transform.gameObject.GetComponent<ObjetInterraction>()) {
+                            if(hit.transform.gameObject.GetComponent<ObjetInterraction>().canUpdate){
+                                MoveObject (hit.transform.gameObject);
+                            }
 						}
 					}
 				} else if (Input.GetMouseButtonDown (1)) {
@@ -170,8 +172,13 @@ public class HudManager : MonoBehaviour {
 					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
 					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
 						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
-							Destroy (hit.transform.gameObject);
-							gm.useDelete ();
+                            ObjetInterraction o = hit.transform.gameObject.GetComponent<ObjetInterraction>();
+                            if(o != null){
+                                Destroy (hit.transform.gameObject);
+                                if(!o.canUpdate){
+                                    gm.useDelete ();
+                                }
+                            }
 						}
 					}
 				}
