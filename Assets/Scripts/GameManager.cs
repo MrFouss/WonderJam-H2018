@@ -11,14 +11,13 @@ public class GameManager : MonoBehaviour {
 	public bool editionMode;
 	public int score;
 	private HudManager hud;
-    public GameObject buttonRestart;
-    public GameObject buttonMenu;
-    public GameObject buttonQuit;
     public GameObject cible;
     public GameObject textPlay;
     public GameObject textEdit;
     public GameObject PlayButton;
     public GameObject EditButton;
+    public UnityEngine.UI.Text scoreText;
+    public UnityEngine.UI.Text highscoreText;
     public GameObject MenuGameOver;
     private GameObject cibleObj;
 	private Balle balle;
@@ -47,7 +46,8 @@ public class GameManager : MonoBehaviour {
 
 	private bool sonPlay;
 
-	public int timePerdu;
+    public int lostTime;
+    public int timePerdu;
 	public int timeGagneCible;
 
 	public int highScore;
@@ -76,17 +76,23 @@ public class GameManager : MonoBehaviour {
         launchModeEdit ();
 		sonPlay = true;
 		isGameActive = true;
+        timePerdu = lostTime;
 
 	}
     public void restart()
     {
+        balle.restartBalle();
         GameObject[] allItems = GameObject.FindGameObjectsWithTag("objectInteraction");
         foreach (GameObject item in allItems)
         {
-
+            if (item.GetComponent<ObjetInterraction>() != null) {
+                item.GetComponent<ObjetInterraction>().resetEvenement();
+            }
             Destroy(item);
         }
+        score = 0;
         timeSec = timeToLose;
+        timePerdu = lostTime;
         MenuGameOver.SetActive(false);
         changeCible();
         source = GetComponent<AudioSource>();
@@ -95,6 +101,7 @@ public class GameManager : MonoBehaviour {
         textEdit.SetActive(true);
         launchModeEdit();
         sonPlay = true;
+        isGameActive = true;
     }
 
 
@@ -240,18 +247,10 @@ public class GameManager : MonoBehaviour {
 	public void endGame(){
 		isGameActive = false;
 		gameController.submitPlayerScoring (score);
-		highScore = gameController.playerScoring.highScore;
-		Transform[] listTransform = MenuGameOver.GetComponentsInChildren<Transform> (true);
+		highScore = gameController.playerScoring.highScore;       
 
-		foreach (Transform t in listTransform) {
-			if (t.name.Equals ("Score")) {
-				t.GetComponent<UnityEngine.UI.Text> ().text = "Score : " + score;
-			}
-
-			if (t.name.Equals ("HighScore")) {
-				t.GetComponent<UnityEngine.UI.Text> ().text = "High Score : " + highScore;
-			}
-
-		}
+        Destroy(cibleObj);
+        scoreText.text = "Score : " + score;
+	    highscoreText.text = "High Score : " + highScore;
 	}
 }

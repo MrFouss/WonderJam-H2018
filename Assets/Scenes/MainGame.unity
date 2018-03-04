@@ -444,6 +444,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1522342905973128, guid: b654ff6c3d86296478949cd0d5f5d532,
     type: 2}
   m_PrefabInternal: {fileID: 1854299665}
+--- !u!114 &486144939 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114163937186538748, guid: d93166cba4165a149b49527ed363190a,
+    type: 2}
+  m_PrefabInternal: {fileID: 284225997}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &606384715
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,19 +576,24 @@ Prefab:
       objectReference: {fileID: 1472837175}
     - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
         type: 2}
+      propertyPath: MenuGameOver
+      value: 
+      objectReference: {fileID: 284225998}
+    - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
+        type: 2}
       propertyPath: gameZone
       value: 
       objectReference: {fileID: 423808579}
     - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
         type: 2}
-      propertyPath: timeSec
-      value: 60
-      objectReference: {fileID: 0}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 486144939}
     - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
         type: 2}
-      propertyPath: MenuGameOver
+      propertyPath: highscoreText
       value: 
-      objectReference: {fileID: 284225998}
+      objectReference: {fileID: 1285729059}
     - target: {fileID: 114295798979654190, guid: ec91a57049687f84592d27c12db69420,
         type: 2}
       propertyPath: timeToLose
@@ -826,6 +837,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1285729059 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114578913997437302, guid: d93166cba4165a149b49527ed363190a,
+    type: 2}
+  m_PrefabInternal: {fileID: 284225997}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1472837175 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1662466896201388, guid: b654ff6c3d86296478949cd0d5f5d532,

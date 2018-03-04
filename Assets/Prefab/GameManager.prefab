@@ -132,16 +132,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b931d6d5188fe488ef9747572e3708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSec: 90
+  timeToLose: 60
   balleStartPos: {x: 0, y: 0, z: 0}
   editionMode: 0
   score: 0
+  buttonRestart: {fileID: 0}
+  buttonMenu: {fileID: 0}
+  buttonQuit: {fileID: 0}
   cible: {fileID: 1898643459909492, guid: 144427ab7a0346343a5549fe66568910, type: 2}
   textPlay: {fileID: 0}
   textEdit: {fileID: 0}
   PlayButton: {fileID: 0}
   EditButton: {fileID: 0}
+  MenuGameOver: {fileID: 0}
   gameZone: {fileID: 0}
   sonActivation: {fileID: 8300000, guid: 2f4cc67d52c7a0c4d8e099f16ee4769d, type: 3}
+  lostTime: 15
   timePerdu: 15
   timeGagneCible: 20
+  highScore: 0
