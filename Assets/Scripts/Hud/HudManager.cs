@@ -22,6 +22,7 @@ public class HudManager : MonoBehaviour {
     public Material TransparentMaterial;
     
     public float rotationRate = 10;
+	public RectTransform textSuppression;
 
     private bool removeMode = false;
 	private bool wasLeftClick = true;
@@ -32,11 +33,13 @@ public class HudManager : MonoBehaviour {
     private Material spawnedObjectRealMaterial;
 	private GameManager gm;
 	private GameObject previousHovered;
+	private bool afficheText;
 
     private void Start()
     {
         Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
 		gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
+		afficheText = false;
     }
 
     public void UpdateScoreText(int score)
@@ -126,12 +129,19 @@ public class HudManager : MonoBehaviour {
 			}
         }
 
+		if (afficheText) {
+			textSuppression.position = new Vector3 (mouseScreenPos.x, mouseScreenPos.y, 0);
+		} else {
+			textSuppression.position = new Vector3(-5000.0f, -5000.0f, 0.0f);
+		}
+
         // check if mouse in game zone
         RaycastHit gameZoneHit = new RaycastHit();
         int gameZoneMask = LayerMask.GetMask(new string[] {"GameZone"});
         if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out gameZoneHit, Mathf.Infinity, gameZoneMask))
         {
             // in game zone
+
 			/*if (removeMode) {
 				// remove mode
 				Cursor.SetCursor (RemoveTexture, Vector2.zero, CursorMode.Auto);
@@ -184,6 +194,7 @@ public class HudManager : MonoBehaviour {
 							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (1.0f, 1.0f, 1.0f));
 						} else {
 							Cursor.SetCursor (ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
+							afficheText = true;
 							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (0.0f, 0.0f, 0.0f));
 						}
 
@@ -255,7 +266,7 @@ public class HudManager : MonoBehaviour {
 			go.GetComponent<ObjetInterraction> ().resetEvenement ();
 		}
 		Destroy (go);
-		Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+		removeHoverEffect ();
 	}
 
 	private void removeHoverEffect(){
@@ -264,6 +275,7 @@ public class HudManager : MonoBehaviour {
 			m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
 			Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
 			previousHovered = null;
+			afficheText = false;
 		}
 	}
 
