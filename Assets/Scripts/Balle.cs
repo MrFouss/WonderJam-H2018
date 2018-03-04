@@ -7,7 +7,7 @@ public class Balle : MonoBehaviour {
 
 	private RigidbodyConstraints  defaultRigid;
 	private AudioSource source;
-    public Transform particle;
+//	public Transform particle;
 
     private GameManager gm;
 
@@ -57,6 +57,6 @@ public class Balle : MonoBehaviour {
 		// int i = (int)Mathf.Min(Mathf.Floor(coll.relativeVelocity.magnitude / maxVelocity * crashSounds.Length), crashSounds.Length-1);
 		// Debug.Log(i);
         // source.PlayOneShot(crashSounds[i],hitVol);
-        Instantiate(particle, coll.contacts[0].point, Quaternion.identity);
+//        Instantiate(particle, coll.contacts[0].point, Quaternion.identity);
     }
 }

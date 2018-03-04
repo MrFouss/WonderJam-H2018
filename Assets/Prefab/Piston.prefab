@@ -392,8 +392,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 20faae008fc8ddc41b2511f1c16642f0, type: 3}
   - {fileID: 8300000, guid: 22d9055c53f298a469245120ceacc999, type: 3}
   - {fileID: 8300000, guid: 1f2dd32bee7353b43bc66fb45c43e7cf, type: 3}
-  particle: {fileID: 4578215471601812, guid: 4059b89b43bb58c4b82fdc78f575e31e, type: 2}
-  profile: {fileID: 0}
+  particle: {fileID: 4451539333245340, guid: 4904fe32bff371e46af5cf01563e51e3, type: 2}
+  profile: {fileID: 11400000, guid: 0cf97c99317f5d84db680354b905925d, type: 2}
 --- !u!114 &114422620360707016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,6 +407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   canUpdate: 0
+  diviseColorAlbedo: 2
+  diviseColorEmissive: 2
 --- !u!114 &114431948562058980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -424,7 +426,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22d9055c53f298a469245120ceacc999, type: 3}
   - {fileID: 8300000, guid: 1f2dd32bee7353b43bc66fb45c43e7cf, type: 3}
   particle: {fileID: 4578215471601812, guid: 4059b89b43bb58c4b82fdc78f575e31e, type: 2}
-  profile: {fileID: 0}
+  profile: {fileID: 11400000, guid: 0cf97c99317f5d84db680354b905925d, type: 2}
 --- !u!114 &114907951445523040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,10 +451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef3ac9917811e4469936e00f8b9f630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  canUpdate: 0
-  diviseColorAlbedo: 2
-  diviseColorEmissive: 2
   deplacementMax: 2
   tempsExtension: 0.1
   tempsRepli: 1
