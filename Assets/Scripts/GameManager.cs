@@ -43,11 +43,16 @@ public class GameManager : MonoBehaviour {
 	public int timePerdu;
 	public int timeGagneCible;
 
+	public int highScore;
+	private GameController gameController;
+	private bool isGameActive;
+
 
 	// Use this for initialization
 	void Start () {
 		hud = GameObject.FindGameObjectWithTag ("HUD").GetComponent<HudManager> ();
 		balle = GameObject.FindGameObjectWithTag ("Balle").GetComponent<Balle> ();
+		gameController = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
         Xmin = gameZone.transform.position.x - gameZone.transform.localScale.x/2;
         Xmax = gameZone.transform.position.x + gameZone.transform.localScale.x/2;
         Ymin = gameZone.transform.position.y - gameZone.transform.localScale.y/2;
@@ -59,13 +64,13 @@ public class GameManager : MonoBehaviour {
         textEdit.SetActive(true);
         launchModeEdit ();
 		sonPlay = true;
+		isGameActive = true;
 
 	}
 
 	// Update is called once per frame
 	void Update () {
-		timeSec -= Time.deltaTime;
-		hud.UpdateTimerText (timeSec);
+
         if (editionMode)
         {
             textPlay.SetActive(false);
@@ -86,9 +91,17 @@ public class GameManager : MonoBehaviour {
 			source.Stop ();
 		}
 
-		if (timeSec <= 0) {
-			SceneManager.LoadScene ("GameOverScene");
+
+		if (timeSec >= 0) {
+			timeSec -= Time.deltaTime;
+			hud.UpdateTimerText (timeSec);
+		} else {
+			if (isGameActive) {
+				endGame ();
+			}
+
 		}
+			
 
 		if (Input.GetButtonDown ("ToggleGameEdit")) {
             
@@ -180,5 +193,11 @@ public class GameManager : MonoBehaviour {
 
 	public void useDelete(){
 		deleteTime (timePerdu);
+	}
+
+	public void endGame(){
+		isGameActive = false;
+		gameController.submitPlayerScoring (score);
+		highScore = gameController.playerScoring.highScore;
 	}
 }
