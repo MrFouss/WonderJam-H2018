@@ -5,16 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-	public float timeSec;
+    private float timeSec;
+    public float timeToLose;
 	public Vector3 balleStartPos;
 	public bool editionMode;
 	public int score;
 	private HudManager hud;
+    public GameObject buttonRestart;
+    public GameObject buttonMenu;
+    public GameObject buttonQuit;
     public GameObject cible;
     public GameObject textPlay;
     public GameObject textEdit;
     public GameObject PlayButton;
     public GameObject EditButton;
+    public GameObject MenuGameOver;
     private GameObject cibleObj;
 	private Balle balle;
     public GameObject gameZone;
@@ -48,12 +53,14 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        timeSec = timeToLose;
 		hud = GameObject.FindGameObjectWithTag ("HUD").GetComponent<HudManager> ();
-		balle = GameObject.FindGameObjectWithTag ("Balle").GetComponent<Balle> ();
+        balle = GameObject.FindGameObjectWithTag("Balle").GetComponent<Balle>();
         Xmin = gameZone.transform.position.x - gameZone.transform.localScale.x/2;
         Xmax = gameZone.transform.position.x + gameZone.transform.localScale.x/2;
         Ymin = gameZone.transform.position.y - gameZone.transform.localScale.y/2;
         Ymax = gameZone.transform.position.y + gameZone.transform.localScale.y/2;
+        MenuGameOver.SetActive(false);
         changeCible();
 		source= GetComponent<AudioSource>();
 		hud.UpdateScoreText (0);
@@ -63,9 +70,27 @@ public class GameManager : MonoBehaviour {
 		sonPlay = true;
 
 	}
+    public void restart()
+    {
+        GameObject[] allItems = GameObject.FindGameObjectsWithTag("objectInteraction");
+        foreach (GameObject item in allItems)
+        {
 
-	// Update is called once per frame
-	void Update () {
+            Destroy(item);
+        }
+        timeSec = timeToLose;
+        MenuGameOver.SetActive(false);
+        changeCible();
+        source = GetComponent<AudioSource>();
+        hud.UpdateScoreText(0);
+        textPlay.SetActive(false);
+        textEdit.SetActive(true);
+        launchModeEdit();
+        sonPlay = true;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		timeSec -= Time.deltaTime;
 		hud.UpdateTimerText (timeSec);
         if (editionMode)
@@ -89,7 +114,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (timeSec <= 0) {
-			SceneManager.LoadScene ("GameOverScene");
+            MenuGameOver.SetActive(true);
 		}
 
 		if (Input.GetButtonDown ("ToggleGameEdit")) {

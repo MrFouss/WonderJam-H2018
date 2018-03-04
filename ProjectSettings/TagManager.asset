@@ -8,6 +8,10 @@ TagManager:
   - HUD
   - GameManager
   - Cible
+  - Replay
+  - menu
+  - quit
+  - objectInteraction
   layers:
   - Default
   - TransparentFX
