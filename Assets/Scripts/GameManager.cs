@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public GameObject cible;
     public GameObject textPlay;
     public GameObject textEdit;
+    public GameObject PlayButton;
+    public GameObject EditButton;
     private GameObject cibleObj;
 	private Balle balle;
     public GameObject gameZone;
@@ -91,22 +93,28 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown ("ToggleGameEdit")) {
-            
-			if (editionMode) {
-                Debug.Log("launchGame");
-                launchGame ();
-			} else {
-                Debug.Log("launchEdit");
-                launchModeEdit ();
-			}
+            ToggleGameEdit();			
 		}
 	}
+
+    public void ToggleGameEdit() {
+        if (editionMode) {
+            Debug.Log("launchGame");
+            launchGame();
+        }
+        else {
+            Debug.Log("launchEdit");
+            launchModeEdit();
+        }
+    }
 
 	public void launchGame(){
         
         editionMode = false;
-        
-        
+
+        PlayButton.SetActive(false);
+        EditButton.SetActive(true);
+
         //        Debug.Log(editionMode);
         if (myDelegate != null) {
 			myDelegate (true);
@@ -122,7 +130,8 @@ public class GameManager : MonoBehaviour {
 	public void launchModeEdit(){
         editionMode = true;
         
-        
+        PlayButton.SetActive(true);
+        EditButton.SetActive(false);
 
         if (myDelegate != null) {
 			myDelegate (false);

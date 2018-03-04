@@ -92,6 +92,9 @@ public class HudManager : MonoBehaviour {
         //Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
 
+    public void TogglePlayPauseButtonClick() {
+        gm.ToggleGameEdit();
+    }
 
     private void Update()
     {
