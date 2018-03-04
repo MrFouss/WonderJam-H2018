@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour {
 			
 
 		if (Input.GetButtonDown ("ToggleGameEdit")) {
-            ToggleGameEdit();			
+            ToggleGameEdit();
 		}
 	}
 

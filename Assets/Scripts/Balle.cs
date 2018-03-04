@@ -20,12 +20,6 @@ public class Balle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.A)){
-			stopBalle();
-		}
-		if(Input.GetKeyDown(KeyCode.B)){
-			restartBalle();
-		}
 
         int gameZoneMask = LayerMask.GetMask(new string[] { "GameZone" });
         if (!Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 0), Vector3.forward, Mathf.Infinity, gameZoneMask))
