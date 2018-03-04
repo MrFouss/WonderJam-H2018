@@ -10,8 +10,11 @@ public class ObjetInterraction : MonoBehaviour {
 	public float diviseColorAlbedo;
 	public float diviseColorEmissive;
 
-	private Color ColorAlbedo;
-	private Color ColorEmissive;
+	private Color ColorAlbedoNormal;
+	private Color ColorEmissiveNormal;
+
+	private Color ColorAlbedoChange;
+	private Color ColorEmissiveChange;
 
 	void Awake(){
 
@@ -22,8 +25,8 @@ public class ObjetInterraction : MonoBehaviour {
 		canUpdate = true;
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 		gameManager.myaction += setUpdate;
-		ColorAlbedo = GetComponent<Renderer> ().material.GetColor ("_Color");
-		ColorEmissive = GetComponent<Renderer> ().material.GetColor ("_EmissionColor");
+		ColorAlbedoNormal = GetComponent<Renderer> ().material.GetColor ("_Color");
+		ColorEmissiveNormal = GetComponent<Renderer> ().material.GetColor ("_EmissionColor");
 
 	}
 	
@@ -64,10 +67,11 @@ public class ObjetInterraction : MonoBehaviour {
 	}
 
 	public void resetColor(){
-		GetComponent<Renderer> ().material.SetColor ("_Color", ColorAlbedo);
-		GetComponent<Renderer> ().material.SetColor ("_EmissionColor", ColorEmissive);
+		GetComponent<Renderer> ().material.SetColor ("_Color", ColorAlbedoNormal);
+		GetComponent<Renderer> ().material.SetColor ("_EmissionColor", ColorEmissiveNormal);
 
 	}
+
 
 
 	public void resetEvenement(){
