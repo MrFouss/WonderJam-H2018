@@ -175,6 +175,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &215120268
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 8.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 9.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215822308608662, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &636511590 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1220699912685918, guid: d4ef537b28df38a4bb3e0c6c68d89489,
@@ -337,11 +379,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!1 &972516746 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1220699912685918, guid: d4ef537b28df38a4bb3e0c6c68d89489,
-    type: 2}
-  m_PrefabInternal: {fileID: 947165207}
 --- !u!1001 &1006056769
 Prefab:
   m_ObjectHideFlags: 0
