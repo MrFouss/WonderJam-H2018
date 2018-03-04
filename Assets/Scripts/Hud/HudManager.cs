@@ -24,11 +24,13 @@ public class HudManager : MonoBehaviour {
     public float rotationRate = 10;
 
     private bool removeMode = false;
-    private Vector3 mousePosition;
+	private bool wasClicked = true;
+	private Vector3 mousePosition;
     private GameObject spawnedObject;
     private MeshRenderer spawnedObjectRenderer;
     private Material spawnedObjectRealMaterial;
 	private GameManager gm;
+	private GameObject previousHovered;
 
     private void Start()
     {
@@ -93,11 +95,12 @@ public class HudManager : MonoBehaviour {
 
     private void Update()
     {
-
+		// Empty user's hand when in play mode
 		if (!gm.editionMode && spawnedObject != null) {
 			DestroyObjet(spawnedObject);
 			spawnedObject = null;
 		}
+
         // retrieve mouse position in world space + 50
         Vector2 mouseScreenPos = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, 0));
@@ -125,10 +128,9 @@ public class HudManager : MonoBehaviour {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out gameZoneHit, Mathf.Infinity, gameZoneMask))
         {
             // in game zone
-            if (removeMode)
-            {
-                // remove mode
-                Cursor.SetCursor(RemoveTexture, Vector2.zero, CursorMode.Auto);
+			if (removeMode) {
+				// remove mode
+				Cursor.SetCursor (RemoveTexture, Vector2.zero, CursorMode.Auto);
 
 				if (Input.GetMouseButtonDown (0)) {
 					removeMode = false;
@@ -140,9 +142,9 @@ public class HudManager : MonoBehaviour {
 						gm.useDelete ();
 					}
 
-                    // change remove sprite
-                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-                }
+					// change remove sprite
+					Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+				}
 
 			} else if (spawnedObject != null) {
 				// manipulate an object
@@ -152,41 +154,66 @@ public class HudManager : MonoBehaviour {
                     
 					// check if left mouse button clicked
 					if (Input.GetMouseButtonDown (0)) {
-						// forget currently manipulated object
-						spawnedObject = null;
+						if (!wasClicked) {
+							wasClicked = true;
+							// forget currently manipulated object
+							spawnedObject = null;
+						}
+					} else {
+						wasClicked = false;
 					}
 				} else {
 					spawnedObjectRenderer.material = TransparentMaterial;
 				}
 			} else if (gm.editionMode) {
+				
+				RaycastHit hit = new RaycastHit ();
+				int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
 
-				if (Input.GetMouseButtonDown (0)) {
-					// check what needs to be moved
-					RaycastHit hit = new RaycastHit ();
-					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
-					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
-						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible" && hit.transform.gameObject.GetComponent<ObjetInterraction>()) {
-                            if(hit.transform.gameObject.GetComponent<ObjetInterraction>().canUpdate){
-                                MoveObject (hit.transform.gameObject);
-                            }
+				if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
+
+					if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible" && hit.transform.gameObject.GetComponent<ObjetInterraction> ()) {
+
+						GameObject hovered = hit.transform.gameObject;
+
+						if (!hovered.Equals (previousHovered)) {
+							if (previousHovered != null) {
+								Material m = previousHovered.GetComponent<Renderer> ().material;
+								m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
+							}
+							previousHovered = hovered;
+						}
+
+						if(hovered.GetComponent<ObjetInterraction> ().canUpdate){
+							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (1.0f, 1.0f, 1.0f));
+						}
+
+						if (Input.GetMouseButton (0)) {
+							if (!wasClicked) {
+								wasClicked = true;
+								if (hit.transform.gameObject.GetComponent<ObjetInterraction> ().canUpdate) {
+									MoveObject (hit.transform.gameObject);
+								}
+							}
+						} else if (Input.GetMouseButton (1)) {
+							wasClicked = false;
+							DestroyObjet (hit.transform.gameObject);
+							if (!hit.transform.gameObject.GetComponent<ObjetInterraction> ().canUpdate) {
+								gm.useDelete ();
+							}
+						} else {
+							wasClicked = false;
 						}
 					}
-				} else if (Input.GetMouseButtonDown (1)) {
-					// check what needs to be deleted
-					RaycastHit hit = new RaycastHit ();
-					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
-					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
-						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
-                            ObjetInterraction o = hit.transform.gameObject.GetComponent<ObjetInterraction>();
-                            if(o != null){
-								DestroyObjet (hit.transform.gameObject);
-                                if(!o.canUpdate){
-                                    gm.useDelete ();
-                                }
-                            }
-						}
-					}
+				} else if (previousHovered != null) {
+					Material m = previousHovered.GetComponent<Renderer> ().material;
+					m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
+					previousHovered = null;
 				}
+			} else if (previousHovered != null) {
+				Material m = previousHovered.GetComponent<Renderer> ().material;
+				m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
+				previousHovered = null;
 			}
         }
         else
