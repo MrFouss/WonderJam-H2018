@@ -68,4 +68,11 @@ public class ObjetInterraction : MonoBehaviour {
 		GetComponent<Renderer> ().material.SetColor ("_EmissionColor", ColorEmissive);
 
 	}
+
+
+	public void resetEvenement(){
+		gameManager.myActionColorDivise -= ternirObjet; 
+		gameManager.myactionColorReset -= resetColor;
+		gameManager.myaction -= setUpdate;
+	}
 }
