@@ -185,7 +185,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d9a878ce0b6da3e4eb7eee4bca278939, type: 3}
   - {fileID: 8300000, guid: 1929fb8262dab45499a286112bec4e60, type: 3}
   particle: {fileID: 4729881846988692, guid: a5c73d0824d388f45a2528544ff87e05, type: 2}
-  profile: {fileID: 0}
+  profile: {fileID: 11400000, guid: 0cf97c99317f5d84db680354b905925d, type: 2}
 --- !u!114 &114347848170944954
 MonoBehaviour:
   m_ObjectHideFlags: 1

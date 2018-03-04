@@ -33,6 +33,7 @@ public class HudManager : MonoBehaviour {
     private void Start()
     {
         Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+		gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
     }
 
     public void UpdateScoreText(int score)
@@ -45,7 +46,6 @@ public class HudManager : MonoBehaviour {
         int min = (int)remainingTimeInSeconds / 60;
         int sec = (int)remainingTimeInSeconds % 60;
         TimerText.text = (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
-		gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
     }
 
     public void BallLaucherButtonClick()
@@ -90,8 +90,11 @@ public class HudManager : MonoBehaviour {
         //Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
 
-    private void Update()
-    {
+    private void Update() {
+		if (!gm.editionMode && spawnedObject != null) {
+			Destroy(spawnedObject);
+			spawnedObject = null;
+		}
         // retrieve mouse position in world space + 50
         Vector2 mouseScreenPos = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, 0));
@@ -131,7 +134,7 @@ public class HudManager : MonoBehaviour {
 					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
 					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
 						Destroy (hit.transform.gameObject);
-						gm.useDelete ();
+						gm.useDelete();
 					}
 
                     // change remove sprite
@@ -146,7 +149,8 @@ public class HudManager : MonoBehaviour {
                     
 					// check if left mouse button clicked
 					if (Input.GetMouseButtonDown (0)) {
-						// forget currently manipulated object
+                        // forget currently manipulated object
+                        // spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = true;
 						spawnedObject = null;
 					}
 				} else {
@@ -220,6 +224,7 @@ public class HudManager : MonoBehaviour {
 
 	private void MoveObject(GameObject gameObject) {
 		spawnedObject = gameObject;
+        // spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = false;
 		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 		spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
 		spawnedObjectRealMaterial = spawnedObjectRenderer.material;
