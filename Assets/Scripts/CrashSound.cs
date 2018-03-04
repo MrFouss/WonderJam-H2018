@@ -33,14 +33,16 @@ public class CrashSound : MonoBehaviour {
 
     void OnCollisionEnter (Collision coll)
     {
-        source.pitch = Random.Range (lowPitchRange, highPitchRange);
-        float hitVol = coll.relativeVelocity.magnitude * velToVol;
+		if (coll.transform.tag == "Balle") {
+			source.pitch = Random.Range (lowPitchRange, highPitchRange);
+			float hitVol = coll.relativeVelocity.magnitude * velToVol;
 
-        lastCrashTime = Time.time;
+			lastCrashTime = Time.time;
 
-        int i = (int) Mathf.Min(Mathf.Floor(coll.relativeVelocity.magnitude / maxVelocity * crashSounds.Length), crashSounds.Length-1);
-        source.PlayOneShot(crashSounds[i],hitVol);
-        Instantiate(particle, coll.contacts[0].point, Quaternion.identity);
+			int i = (int) Mathf.Min(Mathf.Floor(coll.relativeVelocity.magnitude / maxVelocity * crashSounds.Length), crashSounds.Length-1);
+			source.PlayOneShot(crashSounds[i],hitVol);
+			Instantiate(particle, coll.contacts[0].point, Quaternion.identity);
+		}
     }
 
 }
