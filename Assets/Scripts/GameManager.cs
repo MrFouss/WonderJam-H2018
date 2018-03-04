@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour {
     public void changeCible()
     {
         
-            Vector3 position = new Vector3(Random.Range(Xmin, Xmax), Random.Range(Ymin, Ymax), 0);
+            Vector3 position = new Vector3(Random.Range(Xmin+cible.GetComponent<SphereCollider>().radius*2, Xmax- cible.GetComponent<SphereCollider>().radius * 2), Random.Range(Ymin+ cible.GetComponent<SphereCollider>().radius * 2, Ymax- cible.GetComponent<SphereCollider>().radius * 2), 0);
             Destroy(cibleObj);
             cibleObj = Instantiate(cible, position, Quaternion.identity);
         
