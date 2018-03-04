@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour {
 
 	public void useDelete(){
 		deleteTime (timePerdu);
+		timePerdu += 2;
 	}
 
 	public void endGame(){
