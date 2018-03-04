@@ -131,7 +131,7 @@ public class HudManager : MonoBehaviour {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseScreenPos), out gameZoneHit, Mathf.Infinity, gameZoneMask))
         {
             // in game zone
-			if (removeMode) {
+			/*if (removeMode) {
 				// remove mode
 				Cursor.SetCursor (RemoveTexture, Vector2.zero, CursorMode.Auto);
 
@@ -149,7 +149,7 @@ public class HudManager : MonoBehaviour {
 					Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
 				}
 
-			} else if (spawnedObject != null) {
+			} else*/ if (spawnedObject != null) {
 				// manipulate an object
 				CollisionChecker check = spawnedObject.GetComponent<CollisionChecker> ();
 				if (check.collisions == 0 && check.triggers == 0) {
@@ -173,22 +173,21 @@ public class HudManager : MonoBehaviour {
 				RaycastHit hit = new RaycastHit ();
 				int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
 
-				if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
+				if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) { // dans la game zone
 
-					if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible" && hit.transform.gameObject.GetComponent<ObjetInterraction> ()) {
+					if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible" && hit.transform.gameObject.GetComponent<ObjetInterraction> ()) { // sur un objet interaction
 
 						GameObject hovered = hit.transform.gameObject;
 
-						if (!hovered.Equals (previousHovered)) {
-							if (previousHovered != null) {
-								Material m = previousHovered.GetComponent<Renderer> ().material;
-								m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
-							}
+						if (!hovered.Equals (previousHovered)) { // on a change d'objet survole
+							removeHoverEffect ();
 							previousHovered = hovered;
 						}
 
-						if(hovered.GetComponent<ObjetInterraction> ().canUpdate){
+						if (hovered.GetComponent<ObjetInterraction> ().canUpdate) {
 							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (1.0f, 1.0f, 1.0f));
+						} else {
+							Cursor.SetCursor (ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
 						}
 
 						if (Input.GetMouseButton (0)) {
@@ -208,15 +207,11 @@ public class HudManager : MonoBehaviour {
 							wasClicked = false;
 						}
 					}
-				} else if (previousHovered != null) {
-					Material m = previousHovered.GetComponent<Renderer> ().material;
-					m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
-					previousHovered = null;
+				} else {
+					removeHoverEffect ();
 				}
-			} else if (previousHovered != null) {
-				Material m = previousHovered.GetComponent<Renderer> ().material;
-				m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
-				previousHovered = null;
+			} else {
+				removeHoverEffect ();
 			}
         }
         else
@@ -231,6 +226,8 @@ public class HudManager : MonoBehaviour {
                 spawnedObjectRenderer.material = TransparentMaterial;
 
             }
+
+			removeHoverEffect ();
         }
         
     }
@@ -256,7 +253,7 @@ public class HudManager : MonoBehaviour {
 
 	private void MoveObject(GameObject gameObject) {
 		spawnedObject = gameObject;
-		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		//Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 		spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
 		spawnedObjectRealMaterial = spawnedObjectRenderer.material;
 	}
@@ -267,6 +264,15 @@ public class HudManager : MonoBehaviour {
 			go.GetComponent<ObjetInterraction> ().resetEvenement ();
 		}
 		Destroy (go);
+		Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+	}
 
+	private void removeHoverEffect(){
+		if (previousHovered) {
+			Material m = previousHovered.GetComponent<Renderer> ().material;
+			m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
+			Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+			previousHovered = null;
+		}
 	}
 }
