@@ -132,9 +132,15 @@ public class GameManager : MonoBehaviour {
     }
     public void changeCible()
     {
+            Vector3 position;
+        do {
+            position = new Vector3(Random.Range(Xmin + cible.GetComponent<SphereCollider>().radius * 2, Xmax - cible.GetComponent<SphereCollider>().radius * 2), Random.Range(Ymin + cible.GetComponent<SphereCollider>().radius * 2, Ymax - cible.GetComponent<SphereCollider>().radius * 2), 0);
+        } while (Physics.CheckSphere(position, cible.GetComponent<SphereCollider>().radius * 2));
         
-            Vector3 position = new Vector3(Random.Range(Xmin+cible.GetComponent<SphereCollider>().radius*2, Xmax- cible.GetComponent<SphereCollider>().radius * 2), Random.Range(Ymin+ cible.GetComponent<SphereCollider>().radius * 2, Ymax- cible.GetComponent<SphereCollider>().radius * 2), 0);
-            Destroy(cibleObj);
+            
+            
+        Destroy(cibleObj);
+    
             cibleObj = Instantiate(cible, position, Quaternion.identity);
         
     }
