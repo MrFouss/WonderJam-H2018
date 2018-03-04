@@ -119,9 +119,13 @@ public class GameManager : MonoBehaviour {
 			source.Stop ();
 		}
 
-		if (timeSec <= 0) 
+        if (timeSec <= 0)
+        {
+            editionMode = false;
+            PlayButton.SetActive(false);
+            EditButton.SetActive(false);
             MenuGameOver.SetActive(true);
-
+        }
 
 		if (timeSec >= 0) {
 			timeSec -= Time.deltaTime;
