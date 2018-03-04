@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour {
 
+    private Color color;
+    public GameManager gm;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
+		color = GetComponent<Button>().image.color;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,13 +19,13 @@ public class ButtonManager : MonoBehaviour {
 	}
 
     public void HighlightButton() {
-        Color color = GetComponent<Button>().image.color;
-        color.a = 1.0f;
-        GetComponent<Button>().image.color = color;
+        if (gm.editionMode) {
+            color.a = 1.0f;
+            GetComponent<Button>().image.color = color;
+        }
     }
 
     public void HideButton() {
-        Color color = GetComponent<Button>().image.color;
         color.a = 0.5f;
         GetComponent<Button>().image.color = color;
     }
