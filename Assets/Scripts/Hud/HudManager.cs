@@ -147,7 +147,7 @@ public class HudManager : MonoBehaviour {
 					// check if left mouse button clicked
 					if (Input.GetMouseButtonDown (0)) {
                         // forget currently manipulated object
-                        spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = true;
+                        // spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = true;
 						spawnedObject = null;
 					}
 				} else {
@@ -221,7 +221,7 @@ public class HudManager : MonoBehaviour {
 
 	private void MoveObject(GameObject gameObject) {
 		spawnedObject = gameObject;
-        spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = false;
+        // spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = false;
 		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 		spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
 		spawnedObjectRealMaterial = spawnedObjectRenderer.material;
