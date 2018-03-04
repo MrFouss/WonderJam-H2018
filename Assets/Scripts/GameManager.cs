@@ -112,11 +112,11 @@ public class GameManager : MonoBehaviour {
 
     public void ToggleGameEdit() {
         if (editionMode) {
-            Debug.Log("launchGame");
+            //Debug.Log("launchGame");
             launchGame();
         }
         else {
-            Debug.Log("launchEdit");
+            //Debug.Log("launchEdit");
             launchModeEdit();
         }
     }
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour {
 			myDelegate (true);
 		}
 		if (myactionColorReset != null) {
-			Debug.Log ("Launch");
+			//Debug.Log ("Launch");
 			myactionColorReset ();
 		}
 		balle.restartBalle ();
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour {
 		balle.resetPosBalle (balleStartPos);
 
 		if (myActionColorDivise != null) {
-			Debug.Log ("Pause");
+			//Debug.Log ("Pause");
 			myActionColorDivise ();
 		}
 	

@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour {
 			PlayerScoring loadedData = JsonUtility.FromJson<PlayerScoring>(dataAsJson);
 
 			playerScoring.highScore = loadedData.highScore;
-			Debug.Log (playerScoring.highScore);
+			//Debug.Log (playerScoring.highScore);
 		}
 		else
 		{
