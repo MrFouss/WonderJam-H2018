@@ -84,15 +84,18 @@ public class HudManager : MonoBehaviour {
         removeMode = true;
         if (spawnedObject != null)
         {
-            Destroy(spawnedObject);
+			DestroyObjet(spawnedObject);
 
         }
         //Cursor.SetCursor(ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
     }
 
-    private void Update() {
+
+    private void Update()
+    {
+
 		if (!gm.editionMode && spawnedObject != null) {
-			Destroy(spawnedObject);
+			DestroyObjet(spawnedObject);
 			spawnedObject = null;
 		}
         // retrieve mouse position in world space + 50
@@ -111,7 +114,7 @@ public class HudManager : MonoBehaviour {
             spawnedObject.transform.Rotate(Vector3.forward, wheel * rotationRate);
 
 			if (Input.GetMouseButtonDown (1)) {
-				Destroy(spawnedObject);
+				DestroyObjet(spawnedObject);
 				spawnedObject = null;
 			}
         }
@@ -133,8 +136,8 @@ public class HudManager : MonoBehaviour {
 					RaycastHit hit = new RaycastHit ();
 					int nonGameZoneMask = LayerMask.GetMask (new string[] { "Default" });
 					if (Physics.Raycast (Camera.main.ScreenPointToRay (mouseScreenPos), out hit, Mathf.Infinity, nonGameZoneMask)) {
-						Destroy (hit.transform.gameObject);
-						gm.useDelete();
+						DestroyObjet (hit.transform.gameObject);
+						gm.useDelete ();
 					}
 
                     // change remove sprite
@@ -149,8 +152,7 @@ public class HudManager : MonoBehaviour {
                     
 					// check if left mouse button clicked
 					if (Input.GetMouseButtonDown (0)) {
-                        // forget currently manipulated object
-                        // spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = true;
+						// forget currently manipulated object
 						spawnedObject = null;
 					}
 				} else {
@@ -177,7 +179,7 @@ public class HudManager : MonoBehaviour {
 						if (hit.transform.tag != "Balle" && hit.transform.tag != "Cible") {
                             ObjetInterraction o = hit.transform.gameObject.GetComponent<ObjetInterraction>();
                             if(o != null){
-                                Destroy (hit.transform.gameObject);
+								DestroyObjet (hit.transform.gameObject);
                                 if(!o.canUpdate){
                                     gm.useDelete ();
                                 }
@@ -210,7 +212,7 @@ public class HudManager : MonoBehaviour {
 			// destroy currently manipulated object to replace it
 			if (spawnedObject != null)
 			{
-				Destroy(spawnedObject);
+				DestroyObjet(spawnedObject);
 			}
 			removeMode = false;
 			//Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -224,9 +226,17 @@ public class HudManager : MonoBehaviour {
 
 	private void MoveObject(GameObject gameObject) {
 		spawnedObject = gameObject;
-        // spawnedObject.GetComponent<FlickeringLight>().FlickerEnabled = false;
 		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 		spawnedObjectRenderer = spawnedObject.GetComponent<MeshRenderer>();
 		spawnedObjectRealMaterial = spawnedObjectRenderer.material;
+	}
+
+	private void DestroyObjet(GameObject go){
+		
+		if (go.GetComponent<ObjetInterraction> () != null) {
+			go.GetComponent<ObjetInterraction> ().resetEvenement ();
+		}
+		Destroy (go);
+
 	}
 }
