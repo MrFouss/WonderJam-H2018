@@ -435,6 +435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef3ac9917811e4469936e00f8b9f630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  canUpdate: 0
+  diviseColorAlbedo: 2
+  diviseColorEmissive: 2
   deplacementMax: 2
   tempsExtension: 0.1
   tempsRepli: 1
