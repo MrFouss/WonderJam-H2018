@@ -14,6 +14,11 @@ public class ButtonOnClick : MonoBehaviour {
 		
 	}
 
+    public void retourMenu()
+    {
+        SceneManager.LoadScene("MenuPrincipal");
+    }
+
 
 	public void LancerPartie(){
 		SceneManager.LoadScene ("MainGame");

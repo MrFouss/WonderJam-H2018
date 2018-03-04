@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: 114407416450983524}
   m_Layer: 0
   m_Name: TrampolineTriangle
-  m_TagString: Untagged
+  m_TagString: objectInteraction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
