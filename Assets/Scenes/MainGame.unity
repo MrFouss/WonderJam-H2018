@@ -480,6 +480,33 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 95.31713
       objectReference: {fileID: 0}
+    - target: {fileID: 4893362138015068, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893362138015068, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.0038819364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893362138015068, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.003881936
+      objectReference: {fileID: 0}
+    - target: {fileID: 114669346932702324, guid: 617f440e248327c46a81e3efce056ef5,
+        type: 2}
+      propertyPath: InterSpace
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212780844677882712, guid: 617f440e248327c46a81e3efce056ef5,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0.297
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854311146033966, guid: 617f440e248327c46a81e3efce056ef5,
+        type: 2}
+      propertyPath: MaxRotationPerSecond
+      value: 360
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 617f440e248327c46a81e3efce056ef5, type: 2}
   m_IsPrefabParent: 0
