@@ -16,14 +16,8 @@ public class CibleBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
-        Debug.Log("la balle touche la cible");
         if (collider.tag == "Balle") {
-			Debug.Log ("la balle touche la cible");
-
-			gameManager.cibleTouched();
-            
-			
-
+			gameManager.cibleTouched();  
 		} else {
             if (!gameManager.editionMode)
             {
