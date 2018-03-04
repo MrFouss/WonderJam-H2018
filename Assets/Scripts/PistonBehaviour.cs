@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistonBehaviour : ObjetInterraction {
+public class PistonBehaviour : MonoBehaviour {
 	public float deplacementMax;
 	public float tempsExtension;
 	public float tempsRepli;
@@ -20,7 +20,6 @@ public class PistonBehaviour : ObjetInterraction {
 	private AudioSource source;
 
 
-
 	void Awake () {
 		source = GetComponent<AudioSource>();
 
@@ -29,7 +28,6 @@ public class PistonBehaviour : ObjetInterraction {
 
 	// Use this for initialization
 	public void Start () {
-		base.Start ();
 		Debug.Log ("mode EXTENSION");
 		etat = PistonEtat.REPLI;
 		tempsFin = -1.0f;
@@ -39,7 +37,7 @@ public class PistonBehaviour : ObjetInterraction {
 		vitesseRepli = -deplacementMax / tempsRepli;
 		doitEtreEnclanche = false;
 		actif = false;
-		gameManager.myDelegate += setActif;
+		GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().myDelegate += setActif;
 
 	}
 	

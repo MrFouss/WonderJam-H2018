@@ -228,6 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   canUpdate: 0
+  diviseColorAlbedo: 2
+  diviseColorEmissive: 2
 --- !u!114 &114600152257095256
 MonoBehaviour:
   m_ObjectHideFlags: 1
