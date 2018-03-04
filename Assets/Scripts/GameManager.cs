@@ -90,11 +90,10 @@ public class GameManager : MonoBehaviour {
 			SceneManager.LoadScene ("GameOverScene");
 		}
 
-		if (Input.GetKeyUp (KeyCode.Tab)) {
+		if (Input.GetButtonDown ("ToggleGameEdit")) {
             
 			if (editionMode) {
                 Debug.Log("launchGame");
-                
                 launchGame ();
 			} else {
                 Debug.Log("launchEdit");

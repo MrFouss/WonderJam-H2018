@@ -10,11 +10,15 @@ public class ObjetInterraction : MonoBehaviour {
 	public float diviseColorAlbedo;
 	public float diviseColorEmissive;
 
-	private Color ColorAlbedo;
-	private Color ColorEmissive;
+	private Color ColorAlbedoNormal;
+	private Color ColorEmissiveNormal;
+
+	private Color ColorAlbedoChange;
+	private Color ColorEmissiveChange;
 
 	void Awake(){
-
+		ColorAlbedoNormal = GetComponent<Renderer> ().material.GetColor ("_Color");
+		ColorEmissiveNormal = GetComponent<Renderer> ().material.GetColor ("_EmissionColor");
 	}
 
 	// Use this for initialization
@@ -22,8 +26,9 @@ public class ObjetInterraction : MonoBehaviour {
 		canUpdate = true;
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 		gameManager.myaction += setUpdate;
-		ColorAlbedo = GetComponent<Renderer> ().material.GetColor ("_Color");
-		ColorEmissive = GetComponent<Renderer> ().material.GetColor ("_EmissionColor");
+
+		prepareColor ();
+		Debug.Log (ColorAlbedoNormal);
 
 	}
 	
@@ -45,27 +50,31 @@ public class ObjetInterraction : MonoBehaviour {
 	public void ternirObjet(){
 		Debug.Log ("mat.name");
 		Renderer rend = GetComponent<Renderer> ();
-		foreach (Material mat in rend.materials) {
-			Color temp = mat.GetColor ("_Color");
-			temp.b = temp.b / diviseColorAlbedo;
-			temp.g = temp.g / diviseColorAlbedo;
-			temp.r = temp.r / diviseColorAlbedo;
-			mat.SetColor ("_Color", temp);
-
-			temp = mat.GetColor ("_EmissionColor");
-			temp.b = temp.b / diviseColorEmissive;
-			temp.g = temp.g / diviseColorEmissive;
-			temp.r = temp.r / diviseColorEmissive;
-			mat.SetColor ("_EmissionColor", temp);
-
-
-		}
+		rend.material.SetColor ("_Color", ColorAlbedoChange);
+		rend.material.SetColor ("_EmissionColor",ColorEmissiveChange );
 
 	}
 
 	public void resetColor(){
-		GetComponent<Renderer> ().material.SetColor ("_Color", ColorAlbedo);
-		GetComponent<Renderer> ().material.SetColor ("_EmissionColor", ColorEmissive);
+		GetComponent<Renderer> ().material.SetColor ("_Color", ColorAlbedoNormal);
+		GetComponent<Renderer> ().material.SetColor ("_EmissionColor", ColorEmissiveNormal);
 
+	}
+
+	public void prepareColor(){
+		ColorAlbedoChange.b = ColorAlbedoNormal.b / diviseColorAlbedo;
+		ColorAlbedoChange.g = ColorAlbedoNormal.g / diviseColorAlbedo;
+		ColorAlbedoChange.r = ColorAlbedoNormal.r / diviseColorAlbedo;
+
+		ColorEmissiveChange.b = ColorAlbedoNormal.b / diviseColorEmissive;
+		ColorEmissiveChange.g = ColorAlbedoNormal.g / diviseColorEmissive;
+		ColorEmissiveChange.r = ColorAlbedoNormal.r / diviseColorEmissive;
+	}
+
+
+	public void resetEvenement(){
+		gameManager.myActionColorDivise -= ternirObjet; 
+		gameManager.myactionColorReset -= resetColor;
+		gameManager.myaction -= setUpdate;
 	}
 }
