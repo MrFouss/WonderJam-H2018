@@ -21,14 +21,14 @@ public class MagnetField : MonoBehaviour {
         Bounds backgroundBounds = GetComponent<SpriteRenderer>().bounds;
 
         Vector2 backgroundSize = backgroundBounds.size;
-        Debug.Log(backgroundSize);
+        //Debug.Log(backgroundSize);
         Vector3 backgroundTopLeftCorner = backgroundBounds.center - new Vector3(backgroundBounds.extents.x, backgroundBounds.extents.y, 0.1f);
         Vector2 magnetSize = MagnetPrefab.GetComponent<SpriteRenderer>().bounds.size;
-        Debug.Log(magnetSize);
+        //Debug.Log(magnetSize);
         int lineLength = (int) ((backgroundSize.x-InterSpace) / (magnetSize.x+InterSpace));
         int columnLength = (int)((backgroundSize.y-InterSpace) / (magnetSize.y+InterSpace));
 
-        Debug.Log(lineLength + " ; " + columnLength);
+        //Debug.Log(lineLength + " ; " + columnLength);
 
         for (int i = 0; i < lineLength; ++i)
         {
