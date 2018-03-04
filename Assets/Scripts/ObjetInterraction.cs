@@ -28,7 +28,7 @@ public class ObjetInterraction : MonoBehaviour {
 		gameManager.myaction += setUpdate;
 
 		prepareColor ();
-		Debug.Log (ColorAlbedoNormal);
+		//Debug.Log (ColorAlbedoNormal);
 
 	}
 	
@@ -40,7 +40,7 @@ public class ObjetInterraction : MonoBehaviour {
 	}
 
 	public void setUpdate(bool etat){
-		Debug.Log ("update" + etat);
+		//Debug.Log ("update" + etat);
 		canUpdate = etat;
 		gameManager.myaction -= setUpdate;
 		gameManager.myActionColorDivise += ternirObjet; 
@@ -48,7 +48,7 @@ public class ObjetInterraction : MonoBehaviour {
 	}
 
 	public void ternirObjet(){
-		Debug.Log ("mat.name");
+		//Debug.Log ("mat.name");
 		Renderer rend = GetComponent<Renderer> ();
 		rend.material.SetColor ("_Color", ColorAlbedoChange);
 		rend.material.SetColor ("_EmissionColor",ColorEmissiveChange );

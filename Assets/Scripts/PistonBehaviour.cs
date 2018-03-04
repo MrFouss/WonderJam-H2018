@@ -28,7 +28,7 @@ public class PistonBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-		Debug.Log ("mode EXTENSION");
+		//Debug.Log ("mode EXTENSION");
 		etat = PistonEtat.REPLI;
 		tempsFin = -1.0f;
         deplacementRepli = (transform.position - this.transform.parent.position).magnitude;
@@ -46,7 +46,7 @@ public class PistonBehaviour : MonoBehaviour {
 			//On passe à l'état suivant
 			switch (etat) {
 			case PistonEtat.EXTENSION:
-				Debug.Log ("mode PAUSE");
+				//Debug.Log ("mode PAUSE");
 				etat = PistonEtat.PAUSE;
 				tempsFin = Time.time + tempsPause;
 				rb.velocity = Vector3.zero;
@@ -54,7 +54,7 @@ public class PistonBehaviour : MonoBehaviour {
 				doitEtreEnclanche = false;
 				break;
 			case PistonEtat.PAUSE:
-				Debug.Log ("mode REPLI");
+				//Debug.Log ("mode REPLI");
 				etat = PistonEtat.REPLI;
 				tempsFin = Time.time + tempsRepli;
 				rb.velocity = Vector3.zero;
@@ -64,7 +64,7 @@ public class PistonBehaviour : MonoBehaviour {
 				rb.velocity = Vector3.zero;
                 transform.position = transform.parent.position + transform.parent.up * deplacementRepli;
                 if (doitEtreEnclanche && actif){
-					Debug.Log ("mode EXTENSION");
+					//Debug.Log ("mode EXTENSION");
 					etat = PistonEtat.EXTENSION;
 					tempsFin = Time.time + tempsExtension;
 					rb.AddForce (transform.up * vitesseExtension, ForceMode.VelocityChange);

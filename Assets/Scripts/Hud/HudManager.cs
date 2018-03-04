@@ -193,7 +193,14 @@ public class HudManager : MonoBehaviour {
 						if (hovered.GetComponent<ObjetInterraction> ().canUpdate) {
 							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (1.0f, 1.0f, 1.0f));
 						} else {
-							Cursor.SetCursor (ImpossibleRemoveTexture, Vector2.zero, CursorMode.Auto);
+							string text = "-" + gm.timePerdu + " sec";
+							int i = 1;
+							while (i < text.Length) {
+								text = text.Insert (i, " ");
+								i += 2;
+							}
+							Debug.Log (text);
+							textSuppression.GetChild (0).gameObject.GetComponent<Text> ().text = text;
 							afficheText = true;
 							hovered.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color (0.0f, 0.0f, 0.0f));
 						}
@@ -273,7 +280,7 @@ public class HudManager : MonoBehaviour {
 		if (previousHovered) {
 			Material m = previousHovered.GetComponent<Renderer> ().material;
 			m.SetColor ("_EmissionColor", m.GetColor ("_Color"));
-			Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
+//			Cursor.SetCursor(DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
 			previousHovered = null;
 			afficheText = false;
 		}
