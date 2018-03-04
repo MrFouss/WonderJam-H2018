@@ -12,8 +12,8 @@ public class CibleBehaviour : MonoBehaviour {
 
 	private GameManager gameManager;
 	private Vector3 originalScale;
+	private float originalRadius;
 	private float timerStartNextBeat;
-	// private float timerEndNextBeat;
 	private bool inBeat;
 	private float timeStartActualBeat;
 	private AudioSource source;
@@ -22,6 +22,7 @@ public class CibleBehaviour : MonoBehaviour {
 		source = GetComponent<AudioSource>();
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 		originalScale = this.transform.localScale;
+		originalRadius = this.GetComponent<SphereCollider> ().radius;
 		inBeat = false;
 		this.startBeat();
 	}
@@ -37,9 +38,11 @@ public class CibleBehaviour : MonoBehaviour {
 
 			if(sin >= 0.0f){
 				this.transform.localScale = originalScale * (1.0f + sin * amplitudeBeat);
+				this.GetComponent<SphereCollider>().radius = originalRadius / (1.0f + sin * amplitudeBeat);
 			}
 			else {
 				this.transform.localScale = originalScale;
+				this.GetComponent<SphereCollider>().radius = originalRadius;
 				inBeat = false;
 			}
 		}
@@ -71,6 +74,5 @@ public class CibleBehaviour : MonoBehaviour {
 
 	private void planifNextBeat(){
 		timerStartNextBeat = Time.time + 1.0f / beatRate - dureeBeat / 2.0f;
-		// timerEndNextBeat = timerStartNextBeat + dureeBeat;
 	}
 }
